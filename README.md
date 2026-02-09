@@ -75,8 +75,7 @@ elaborate dal backend.
 
 Esempio di file JSON delle preferenze:
 
-{ \"user_preferences\": \[\"tecnologia\", \"crime\", \"attualità\"\],
-\"weights\": {\"tecnologia\": 1.0, \"crime\": 0.8, \"attualità\": 0.6} }
+{ \"user_preferences\": \[\"tecnologia\", \"crime\", \"attualità\"\] }
 
 Algoritmo di Similarità
 

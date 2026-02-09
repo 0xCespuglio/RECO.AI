@@ -46,7 +46,17 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     async function saveJSON(data) {
         const fileName = "user_preferences.json";
-        const jsonString = JSON.stringify(data, null, 2);
+
+        // --- MODIFICA FORMATTAZIONE ---
+        // Invece di JSON.stringify(data, null, 2) che manda a capo ogni elemento dell'array,
+        // costruiamo la stringa manualmente per avere i tag sulla stessa riga.
+        // Formato desiderato: { "tags": ["tag1", "tag2"] }
+        
+        // 1. Convertiamo ogni tag in stringa JSON (gestisce le virgolette) e uniamo con virgola e spazio
+        const tagsLine = data.tags.map(tag => JSON.stringify(tag)).join(', ');
+        
+        // 2. Costruiamo l'oggetto finale
+        const jsonString = `{\n  "tags": [${tagsLine}]\n}`;
 
         try {
             // METODO 1: File System Access API (Più moderno, permette di scegliere la cartella)
@@ -118,11 +128,16 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // 3. Log di controllo (come richiesto per il Gruppo 2+3 che deve leggere il file)
-        console.log("Generazione JSON in corso...", selectedPreferences);
+        // 3. Creazione oggetto JSON finale (Richiesta specifica: oggetto con chiave 'tags')
+        const finalData = {
+            tags: selectedPreferences
+        };
+
+        // Log di controllo
+        console.log("Generazione JSON in corso...", finalData);
 
         // 4. Avvia il salvataggio
-        saveJSON(selectedPreferences);
+        saveJSON(finalData);
     });
 
     // Console log informativo per il team
@@ -132,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ============================================
     Script caricato.
     Pronto a generare "user_preferences.json"
-    nel formato array semplice: ["Tag1", "Tag2"]
+    nel formato compatto: { "tags": ["Tag1", "Tag2"] }
     ============================================
     `);
 });

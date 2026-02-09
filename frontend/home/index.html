@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECO.AI - Raccomandazione Podcast</title>
+</head>
+<body>
+    <div>
+        <h1>RECO.AI - Raccomandazione Podcast</h1>
+        <p>Basato sulle tue preferenze, ecco i podcast consigliati:</p>
+    </div>
+
+    <div id="loading">
+        <p>Caricamento dati in corso...</p>
+    </div>
+
+    <div id="error" style="display: none; color: red; border: 2px solid red; padding: 10px;">
+        <h3>Errore</h3>
+        <p id="error-message"></p>
+    </div>
+
+    <div id="podcasts-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

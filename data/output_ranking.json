@@ -1,0 +1,46 @@
+{
+  
+
+  "ranking": [
+    {
+      "titolo": "Muschio Selvaggio",
+      "descrizione": "desc/Muschio-Selvaggio.txt",
+      "punteggio": 80.0,
+      "tag_comuni": ["sviluppo personale", "psicologia maschile", "mindset"],
+      "link": "https://open.spotify.com",
+      "immagine": "Muschio-Selvaggio.jpg"
+    },
+    {
+      "titolo": "La Zanzara",
+      "descrizione": "desc/La-Zanzara.txt",
+      "punteggio": 32.0,
+      "tag_comuni": ["talk show", "satira", "attualità"],
+      "link": "https://open.spotify.com/",
+      "immagine": "La-Zanzara.jpg"
+    },
+    {
+      "titolo": "One More Time",
+      "descrizione": "desc/One-More-Time.txt",
+      "punteggio": 94.0,
+      "tag_comuni": ["cinema", "serie TV", "recensioni"],
+      "link": "https://open.spotify.com/",
+      "immagine": "One-More-Time.jpg"
+    },
+    {
+      "titolo": "Power Pizza Podcast",
+      "descrizione": "desc/Power-Pizza-Podcast.txt",
+      "punteggio": 65.0,
+      "tag_comuni": ["cultura pop", "videogiochi", "intrattenimento"],
+      "link": "https://open.spotify.com/",
+      "immagine": "Power-Pizza-Podcast.jpg"
+    },
+    {
+      "titolo": "Elisa True Crime",
+      "descrizione": "desc/Elisa-True-Crime.txt",
+      "punteggio": 74.0,
+      "tag_comuni": ["true crime", "cronaca nera", "investigazione"],
+      "link": "https://open.spotify.com/",
+      "immagine": "Elisa-True-Crime.jpg"
+    }
+  ]
+}

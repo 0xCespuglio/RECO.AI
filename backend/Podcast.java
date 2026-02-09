@@ -9,7 +9,6 @@ public class Podcast {
     // ========== ATTRIBUTI ==========
     
     private String titolo;                  // Nome del podcast
-    private String descrizioneBreve;        // Descrizione breve (opzionale)
     private String[] tag;                   // Array di tag tematici
     private double[] pesi;                  // Array di pesi (parallelo ai tag)
     private String link;                    // URL Spotify/YouTube
@@ -22,11 +21,10 @@ public class Podcast {
     /**
      * Costruttore completo
      */
-    public Podcast(String titolo, String descrizioneBreve, String[] tag, 
+    public Podcast(String titolo, String[] tag, 
                    double[] pesi, String link, String percorsoImmagine, 
                    String percorsoDescrizione) {
         this.titolo = titolo;
-        this.descrizioneBreve = descrizioneBreve;
         this.tag = tag;
         this.pesi = pesi;
         this.link = link;
@@ -38,7 +36,7 @@ public class Podcast {
      * Costruttore semplificato
      */
     public Podcast(String titolo, String[] tag, double[] pesi, String link) {
-        this(titolo, "", tag, pesi, link, "", "");
+        this(titolo, tag, pesi, link, "", "");
     }
     
     /**
@@ -58,14 +56,6 @@ public class Podcast {
     
     public void setTitolo(String titolo) {
         this.titolo = titolo;
-    }
-    
-    public String getDescrizioneBreve() {
-        return descrizioneBreve;
-    }
-    
-    public void setDescrizioneBreve(String descrizioneBreve) {
-        this.descrizioneBreve = descrizioneBreve;
     }
     
     public String[] getTag() {

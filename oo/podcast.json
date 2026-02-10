@@ -1,0 +1,57 @@
+[
+    {
+        "id": "muschio-selvaggio",
+        "nome": "Muschio selvaggio",
+        "tematiche": [
+            "intrattenimento",
+            "cultura",
+            "interviste"
+        ],
+        "descrizione_breve": "Muschio Selvaggio è il podcast di Fedez e Luis Sal che affronta temi di attualità, cultura pop e intrattenimento con un taglio ironico e diretto.",
+        "immagine": "https://api.dicebear.com/7.x/avataaars/svg?seed=muschio"
+    },
+    {
+        "id": "la-zanzara",
+        "nome": "La zanzara",
+        "tematiche": [
+            "attualita",
+            "politica",
+            "satira"
+        ],
+        "descrizione_breve": "La Zanzara è lo storico programma radiofonico condotto da Giuseppe Cruciani e David Parenzo che affronta temi di attualità e politica con un approccio provocatorio e satirico.",
+        "immagine": "https://api.dicebear.com/7.x/avataaars/svg?seed=zanzara"
+    },
+    {
+        "id": "one-more-time",
+        "nome": "One more time",
+        "tematiche": [
+            "interviste",
+            "storie-vita",
+            "cultura-pop"
+        ],
+        "descrizione_breve": "One More Time è il podcast di Luca Casadei che racconta storie di vita attraverso interviste profonde e intime.",
+        "immagine": "https://api.dicebear.com/7.x/avataaars/svg?seed=one"
+    },
+    {
+        "id": "power-pizza",
+        "nome": "Power pizza podcast",
+        "tematiche": [
+            "cultura-pop",
+            "umorismo",
+            "intrattenimento"
+        ],
+        "descrizione_breve": "Power Pizza Podcast esplora la cultura pop con ironia e leggerezza.",
+        "immagine": "https://api.dicebear.com/7.x/avataaars/svg?seed=pizza"
+    },
+    {
+        "id": "elisa-true-crime",
+        "nome": "Elisa true crime",
+        "tematiche": [
+            "crime",
+            "mistero",
+            "narrazione"
+        ],
+        "descrizione_breve": "Elisa De Marco racconta casi di cronaca nera e misteri con grande coinvolgimento.",
+        "immagine": "https://api.dicebear.com/7.x/avataaars/svg?seed=crime"
+    }
+]

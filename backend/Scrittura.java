@@ -5,10 +5,8 @@ import java.util.Locale;
 
 public class Scrittura {
     
-    /**
-     * Scrive il ranking in un file JSON
-     * ✅ Usa Locale.US per formattare con il punto decimale
-     */
+    // Scrive il ranking in un file JSON
+    
     public static void scriviRankingJSON(ArrayList<Ranking> ranking, String pathOutput) {
         try (FileWriter writer = new FileWriter(pathOutput)) {
             writer.write("{\n");
@@ -21,7 +19,6 @@ public class Scrittura {
                 writer.write("      \"titolo\": \"" + r.getNome() + "\",\n");
                 writer.write("      \"descrizione\": \"" + r.getDescrizione() + "\",\n");
                 
-                // ✅ Usa Locale.US per avere il punto invece della virgola
                 writer.write("      \"punteggio\": " + String.format(Locale.US, "%.1f", r.getPunteggio()) + ",\n");
                 
                 // Array tag_comuni
@@ -49,11 +46,11 @@ public class Scrittura {
             writer.write("  ]\n");
             writer.write("}\n");
             
-            System.out.println("✅ Ranking salvato in: " + pathOutput);
-            System.out.println("📊 Podcast raccomandati: " + ranking.size());
+            System.out.println(pathOutput.split("/")[1] +" scritto correttamente in: " + pathOutput);
+
             
         } catch (IOException e) {
-            System.err.println("❌ Errore durante la scrittura del file JSON");
+            System.err.println("Errore durante la scrittura di \"" + pathOutput + "\"!");
             e.printStackTrace();
         }
     }

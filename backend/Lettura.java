@@ -23,11 +23,15 @@ public class Lettura {
                 String link = s[s.length - 2].replace("\"", "");
                 String immagine = s[s.length - 1].replace("\"", "");
 
-                listaPodcast.add(new Podcast(nome, descrizione, tags, link, immagine));
+                listaPodcast.add(new Podcast(nome, descrizione, tags, link, immagine));     
             }
+            System.out.println(pathCatalogo.split("/")[1] +" letto correttamente da: " + pathCatalogo);
+            
 
         } catch (IOException e) {
+            System.out.println("Errore durante la lettura di \"" + pathCatalogo + "\"!");
             e.printStackTrace();
+            
         }
 
         return listaPodcast;
@@ -35,8 +39,8 @@ public class Lettura {
 
     // METEDO PER LEGGERE LE PREFERENZE DELL'UTENTE
 
-        public static String[] leggiPreferenze(String pathPreferenze) {
-    String[] tags = new String[3];
+    public static String[] leggiPreferenze(String pathPreferenze) {
+        String[] tags = new String[3];
     
         try {
             BufferedReader br = new BufferedReader(new FileReader(pathPreferenze));
@@ -50,16 +54,19 @@ public class Lettura {
 
             String json = jsonContent.toString();
             String tagsSection = json.substring(json.indexOf("[") + 1, json.indexOf("]"));
-            String[] parti = tagsSection.split(",");  // ✅ Rinominato da tags
+            String[] parti = tagsSection.split(","); 
 
             for (int i = 0; i < parti.length && i < 3; i++) {
                 tags[i] = parti[i].trim().replace("\"", "");
             }
 
+            System.out.println(pathPreferenze.split("/")[1] +" letto correttamente da: " + pathPreferenze);
+            
         } catch (IOException e) {
+            System.out.println("Errore durante la lettura di \"" + pathPreferenze + "\"!");
             e.printStackTrace();
         }
 
         return tags;
-}
+    }
 }

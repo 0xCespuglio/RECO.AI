@@ -1,153 +1,384 @@
-// Script per aggiungere quadratini selezionabili alle preferenze e salvarle in JSON
 // RECO.AI - Podcast Edition - Gruppo Javascript
+// Script per la selezione delle preferenze utente e generazione user_preferences.json
 
 document.addEventListener('DOMContentLoaded', function() {
-    const tags = document.querySelectorAll('.tag');
-    const submitBtn = document.getElementById('submitBtn');
-    
-    // Aggiungi checkbox a ogni tag per una migliore UX
-    tags.forEach(tag => {
-        // Evita duplicati se lo script viene ricaricato
-        if (tag.querySelector('input[type="checkbox"]')) return;
+    try {
+        // Selezione elementi DOM con validazione
+        const tags = document.querySelectorAll('.tag');
+        const submitBtn = document.getElementById('submitBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const feedbackSection = document.getElementById('feedback');
+        const feedbackList = document.getElementById('feedbackList');
+        const feedbackCount = document.getElementById('feedbackCount');
 
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.style.marginRight = '8px';
-        checkbox.style.width = '18px';
-        checkbox.style.height = '18px';
-        checkbox.style.cursor = 'pointer';
-        
-        // Inserisci il checkbox all'inizio del tag
-        tag.insertBefore(checkbox, tag.firstChild);
-        
-        // Gestisci il click sull'intero div del tag
-        tag.addEventListener('click', function(e) {
-            // Se clicco direttamente il checkbox, non faccio nulla (lo gestisce il browser)
-            if (e.target === checkbox) return;
-            
-            // Altrimenti inverto lo stato del checkbox
-            checkbox.checked = !checkbox.checked;
-            
-            // Aggiungo un feedback visivo alla classe del tag
-            if(checkbox.checked) {
-                tag.style.backgroundColor = '#e0e0e0'; // Leggero grigio per indicare selezione
-                tag.style.border = '1px solid #333';
-            } else {
-                tag.style.backgroundColor = '';
-                tag.style.border = '';
-            }
-        });
-    });
-
-    /**
-     * Funzione principale per salvare il file.
-     * Tenta di usare la moderna API "showSaveFilePicker" per permettere all'utente
-     * di salvare direttamente nella cartella del progetto.
-     */
-    async function saveJSON(data) {
-        const fileName = "user_preferences.json";
-
-        // --- MODIFICA FORMATTAZIONE ---
-        // Invece di JSON.stringify(data, null, 2) che manda a capo ogni elemento dell'array,
-        // costruiamo la stringa manualmente per avere i tag sulla stessa riga.
-        // Formato desiderato: { "tags": ["tag1", "tag2"] }
-        
-        // 1. Convertiamo ogni tag in stringa JSON (gestisce le virgolette) e uniamo con virgola e spazio
-        const tagsLine = data.tags.map(tag => JSON.stringify(tag)).join(', ');
-        
-        // 2. Costruiamo l'oggetto finale
-        const jsonString = `{\n  "tags": [${tagsLine}]\n}`;
-
-        try {
-            // METODO 1: File System Access API (Più moderno, permette di scegliere la cartella)
-            if (window.showSaveFilePicker) {
-                const handle = await window.showSaveFilePicker({
-                    suggestedName: fileName,
-                    types: [{
-                        description: 'JSON File',
-                        accept: { 'application/json': ['.json'] },
-                    }],
-                });
-                
-                const writable = await handle.createWritable();
-                await writable.write(jsonString);
-                await writable.close();
-                
-                alert("File salvato con successo! Assicurati di averlo messo nella cartella del progetto.");
-            } else {
-                // Se il browser non supporta la API sopra, usiamo il metodo classico
-                throw new Error("API non supportata");
-            }
-        } catch (err) {
-            // METODO 2: Fallback (Download classico nella cartella Download)
-            // Questo scatta se l'utente annulla il salvataggio o se il browser è vecchio
-            if (err.name !== 'AbortError') { // Ignora se l'utente ha cliccato "Annulla"
-                console.warn("Uso metodo fallback per il download:", err);
-                const blob = new Blob([jsonString], { type: "application/json" });
-                const url = URL.createObjectURL(blob);
-                
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = fileName;
-                document.body.appendChild(a);
-                a.click();
-                
-                // Pulizia
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-                
-                alert("Il file è stato scaricato nella tua cartella Download.\nPer favore SPOSTALO manualmente nella cartella del progetto Javascript.");
-            }
+        // Validazione elementi critici
+        if (!submitBtn || !resetBtn) {
+            throw new Error('Elementi pulsanti mancanti nel DOM');
         }
-    }
 
-    // Gestione del click sul pulsante "Conferma selezione"
-    submitBtn.addEventListener('click', function() {
-        // 1. Raccogli i dati selezionati
-        const selectedPreferences = [];
-        const allTags = document.querySelectorAll('.tag');
-        
-        allTags.forEach(tag => {
-            const checkbox = tag.querySelector('input[type="checkbox"]');
-            if (checkbox && checkbox.checked) {
-                // Secondo il README, dobbiamo salvare i termini.
-                // Usiamo il testo visibile (es. "Intrattenimento") pulito dagli spazi
-                // Nota: Rimuoviamo il checkbox dal testo clonato per avere solo la parola
-                const clone = tag.cloneNode(true);
-                const cloneCheckbox = clone.querySelector('input');
-                if(cloneCheckbox) clone.removeChild(cloneCheckbox);
-                
-                const cleanText = clone.textContent.trim();
-                selectedPreferences.push(cleanText);
-            }
-        });
-
-        // 2. Validazione: deve aver selezionato almeno qualcosa?
-        if (selectedPreferences.length === 0) {
-            alert("Per favore seleziona almeno una preferenza prima di confermare.");
+        if (tags.length === 0) {
+            console.warn('Nessun tag trovato nella pagina');
             return;
         }
 
-        // 3. Creazione oggetto JSON finale (Richiesta specifica: oggetto con chiave 'tags')
-        const finalData = {
-            tags: selectedPreferences
-        };
+        // Inizializzazione interfaccia
+        initializeTags();
 
-        // Log di controllo
-        console.log("Generazione JSON in corso...", finalData);
+        /**
+         * Inizializza i tag con checkbox e gestori eventi
+         */
+        function initializeTags() {
+            tags.forEach((tag, index) => {
+                try {
+                    // Evita duplicati se lo script viene ricaricato
+                    if (tag.querySelector('input[type="checkbox"]')) return;
 
-        // 4. Avvia il salvataggio
-        saveJSON(finalData);
-    });
+                    // Crea e configura checkbox
+                    const checkbox = createCheckbox();
+                    tag.insertBefore(checkbox, tag.firstChild);
+                    
+                    // Gestori eventi
+                    tag.addEventListener('click', (e) => handleTagClick(e, tag, checkbox));
+                    tag.addEventListener('keypress', (e) => handleTagKeypress(e, checkbox));
+                    
+                    // Aggiungi attributo aria per accessibilità
+                    tag.setAttribute('aria-checked', 'false');
+                    tag.setAttribute('tabindex', '0');
+                    tag.setAttribute('role', 'checkbox');
+                } catch (err) {
+                    console.error(`Errore inizializzazione tag ${index}:`, err);
+                }
+            });
+        }
 
-    // Console log informativo per il team
-    console.log(`
-    ============================================
-    RECO.AI - Gruppo Javascript
-    ============================================
-    Script caricato.
-    Pronto a generare "user_preferences.json"
-    nel formato compatto: { "tags": ["Tag1", "Tag2"] }
-    ============================================
-    `);
+        /**
+         * Crea un elemento checkbox configurato
+         */
+        function createCheckbox() {
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.style.cssText = 'margin-right: 8px; width: 18px; height: 18px; cursor: pointer;';
+            checkbox.setAttribute('aria-hidden', 'true');
+            return checkbox;
+        }
+
+        /**
+         * Gestisce il click sul tag
+         */
+        function handleTagClick(event, tag, checkbox) {
+            try {
+                if (!event || !tag || !checkbox) return;
+                if (event.target === checkbox) return;
+                
+                checkbox.checked = !checkbox.checked;
+                updateTagVisualState(tag, checkbox.checked);
+                updateFeedback();
+            } catch (err) {
+                console.error('Errore gestione click:', err);
+            }
+        }
+
+        /**
+         * Gestisce la pressione di Enter/Space sul tag (accessibilità)
+         */
+        function handleTagKeypress(event, checkbox) {
+            try {
+                if (!event || !checkbox) return;
+                
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    checkbox.checked = !checkbox.checked;
+                    updateTagVisualState(event.currentTarget, checkbox.checked);
+                    updateFeedback();
+                }
+            } catch (err) {
+                console.error('Errore gestione tastiera:', err);
+            }
+        }
+
+        /**
+         * Aggiorna lo stato visivo del tag
+         */
+        function updateTagVisualState(tag, isChecked) {
+            if (!tag) return;
+
+            try {
+                if (isChecked) {
+                    tag.style.backgroundColor = '#e3f2fd';
+                    tag.style.border = '2px solid #2196F3';
+                    tag.style.fontWeight = 'bold';
+                    tag.setAttribute('aria-checked', 'true');
+                } else {
+                    tag.style.backgroundColor = '';
+                    tag.style.border = '';
+                    tag.style.fontWeight = '';
+                    tag.setAttribute('aria-checked', 'false');
+                }
+            } catch (err) {
+                console.error('Errore aggiornamento stato visivo:', err);
+            }
+        }
+
+        /**
+         * Aggiorna il feedback visivo delle selezioni
+         */
+        function updateFeedback() {
+            try {
+                const selected = getSelectedPreferences();
+                
+                if (!feedbackSection) return;
+
+                if (selected.length === 0) {
+                    feedbackSection.style.display = 'none';
+                    return;
+                }
+
+                // Mostra feedback
+                feedbackSection.style.display = 'block';
+                
+                if (feedbackList) {
+                    feedbackList.innerHTML = selected
+                        .map(pref => `<li>${escapeHTML(pref)}</li>`)
+                        .join('');
+                }
+                
+                if (feedbackCount) {
+                    feedbackCount.textContent = selected.length;
+                }
+            } catch (err) {
+                console.error('Errore aggiornamento feedback:', err);
+            }
+        }
+
+        /**
+         * Escape HTML per prevenire XSS
+         */
+        function escapeHTML(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        /**
+         * Raccoglie le preferenze selezionate
+         */
+        function getSelectedPreferences() {
+            const selected = [];
+            
+            tags.forEach(tag => {
+                try {
+                    const checkbox = tag.querySelector('input[type="checkbox"]');
+                    if (!checkbox || !checkbox.checked) return;
+
+                    // Estrae il testo pulito (senza checkbox)
+                    const clone = tag.cloneNode(true);
+                    const cloneCheckbox = clone.querySelector('input');
+                    if (cloneCheckbox) {
+                        clone.removeChild(cloneCheckbox);
+                    }
+                    
+                    const text = clone.textContent.trim();
+                    if (text) {
+                        selected.push(text);
+                    }
+                } catch (err) {
+                    console.error('Errore raccolta preferenza:', err);
+                }
+            });
+            
+            return selected;
+        }
+
+        /**
+         * Salva il file JSON con le preferenze
+         */
+        async function savePreferencesJSON(preferences) {
+            if (!Array.isArray(preferences) || preferences.length === 0) {
+                throw new Error('Preferenze non valide');
+            }
+
+            const fileName = "user_preferences.json";
+            
+            // Formato compatto con validazione
+            const tagsLine = preferences
+                .filter(tag => typeof tag === 'string' && tag.trim())
+                .map(tag => JSON.stringify(tag))
+                .join(', ');
+            
+            const jsonString = `{\n  "tags": [${tagsLine}]\n}`;
+
+            try {
+                // Metodo moderno: File System Access API
+                if (window.showSaveFilePicker) {
+                    const handle = await window.showSaveFilePicker({
+                        suggestedName: fileName,
+                        types: [{
+                            description: 'File JSON',
+                            accept: { 'application/json': ['.json'] },
+                        }],
+                    });
+                    
+                    const writable = await handle.createWritable();
+                    await writable.write(jsonString);
+                    await writable.close();
+                    
+                    showSuccessMessage('File salvato con successo nella posizione selezionata!');
+                } else {
+                    // Fallback automatico per browser non supportati
+                    downloadJSONFile(jsonString, fileName);
+                }
+            } catch (err) {
+                // L'utente ha annullato il salvataggio
+                if (err.name === 'AbortError') {
+                    console.log('Salvataggio annullato dall\'utente');
+                    return;
+                }
+                
+                // Errore durante il salvataggio - usa fallback
+                console.warn('Errore File System API, uso fallback:', err);
+                try {
+                    downloadJSONFile(jsonString, fileName);
+                } catch (fallbackErr) {
+                    console.error('Errore anche con fallback:', fallbackErr);
+                    showErrorMessage('Impossibile salvare il file. Riprova.');
+                }
+            }
+        }
+
+        /**
+         * Download del file JSON (metodo fallback)
+         */
+        function downloadJSONFile(content, fileName) {
+            if (!content || !fileName) {
+                throw new Error('Parametri download non validi');
+            }
+
+            const blob = new Blob([content], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = fileName;
+            link.style.display = 'none';
+            
+            document.body.appendChild(link);
+            link.click();
+            
+            // Pulizia con timeout per compatibilità browser
+            setTimeout(() => {
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }, 100);
+            
+            showSuccessMessage('File scaricato! Spostalo nella cartella del progetto.');
+        }
+
+        /**
+         * Mostra messaggio di successo
+         */
+        function showSuccessMessage(message) {
+            if (!message) return;
+            alert(`✓ ${message}\n\nIl file user_preferences.json è pronto per il backend Java.`);
+        }
+
+        /**
+         * Mostra messaggio di errore
+         */
+        function showErrorMessage(message) {
+            if (!message) return;
+            alert(`⚠️ Errore\n\n${message}`);
+        }
+
+        /**
+         * Valida le selezioni prima del salvataggio
+         */
+        function validateSelections(preferences) {
+            if (!Array.isArray(preferences)) {
+                showErrorMessage('Errore interno: formato preferenze non valido.');
+                return false;
+            }
+
+            const count = preferences.length;
+            const required = 3;
+
+            if (count !== required) {
+                let message = '⚠️ Selezione non valida\n\n';
+                
+                if (count === 0) {
+                    message += 'Non hai selezionato nessuna preferenza.\n';
+                } else if (count < required) {
+                    message += `Hai selezionato solo ${count} preferenza${count === 1 ? '' : 'e'}.\n`;
+                } else {
+                    message += `Hai selezionato ${count} preferenze.\n`;
+                }
+                
+                message += `\nDevi selezionare esattamente ${required} preferenze per continuare.\n`;
+                message += '\n✓ Le tue selezioni attuali sono state mantenute.';
+                
+                alert(message);
+                return false;
+            }
+            
+            return true;
+        }
+
+        // === GESTORI PULSANTI ===
+
+        // Pulsante Conferma
+        submitBtn.addEventListener('click', async function() {
+            try {
+                const preferences = getSelectedPreferences();
+                
+                // Validazione
+                if (!validateSelections(preferences)) return;
+
+                // Creazione oggetto JSON
+                const data = { tags: preferences };
+                
+                console.log('Generazione user_preferences.json:', data);
+                
+                // Salvataggio file
+                await savePreferencesJSON(preferences);
+            } catch (err) {
+                console.error('Errore durante il salvataggio:', err);
+                showErrorMessage('Si è verificato un errore. Riprova.');
+            }
+        });
+
+        // Pulsante Reset
+        resetBtn.addEventListener('click', function() {
+            try {
+                const confirmReset = confirm('Vuoi davvero azzerare tutte le selezioni?');
+                
+                if (!confirmReset) return;
+
+                tags.forEach(tag => {
+                    try {
+                        const checkbox = tag.querySelector('input[type="checkbox"]');
+                        if (checkbox) {
+                            checkbox.checked = false;
+                            updateTagVisualState(tag, false);
+                        }
+                    } catch (err) {
+                        console.error('Errore reset tag:', err);
+                    }
+                });
+                
+                updateFeedback();
+                console.log('Selezioni azzerate');
+            } catch (err) {
+                console.error('Errore durante il reset:', err);
+                showErrorMessage('Errore durante il reset. Ricarica la pagina.');
+            }
+        });
+
+        // Log iniziale
+        console.log('✓ RECO.AI - Script caricato e pronto');
+        console.log(`  - ${tags.length} tag disponibili`);
+        console.log('  - Formato output: { "tags": ["tag1", "tag2", ...] }');
+
+    } catch (err) {
+        console.error('Errore critico durante l\'inizializzazione:', err);
+        alert('⚠️ Errore di inizializzazione\n\nRicarica la pagina. Se il problema persiste, controlla la console.');
+    }
 });

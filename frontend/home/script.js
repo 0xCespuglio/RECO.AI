@@ -247,7 +247,7 @@ function createPodcastElement(podcast, position) {
     }
     
     // Descrizione (se è un percorso file, lo indichiamo)
-    const descDiv = document.createElement('div');
+    const descDiv = document.createElement('div'); 
     descDiv.style.margin = '10px 0';
     descDiv.style.color = '#555';
     

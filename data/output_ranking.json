@@ -1,12 +1,60 @@
 {
   "ranking": [
     {
+      "titolo": "Stories",
+      "descrizione": "desc/Stories.txt",
+      "punteggio": 50.0,
+      "tag_comuni": ["news","attualità"],
+      "link": "https://open.spotify.com",
+      "immagine": "Stories.jpg"
+    },
+    {
+      "titolo": "SeieTrenta",
+      "descrizione": "desc/SeieTrenta.txt",
+      "punteggio": 50.0,
+      "tag_comuni": ["news","attualità"],
+      "link": "https://open.spotify.com",
+      "immagine": "SeieTrenta.jpg"
+    },
+    {
       "titolo": "La Zanzara",
       "descrizione": "desc/La-Zanzara.txt",
       "punteggio": 50.0,
-      "tag_comuni": ["talk show","satira"],
-      "link": "https://open.spotify.com/",
+      "tag_comuni": ["news","attualità"],
+      "link": "https://open.spotify.com",
       "immagine": "La-Zanzara.jpg"
+    },
+    {
+      "titolo": "The Essential",
+      "descrizione": "desc/The-Essential.txt",
+      "punteggio": 50.0,
+      "tag_comuni": ["news","attualità"],
+      "link": "https://open.spotify.com",
+      "immagine": "The-Essential.jpg"
+    },
+    {
+      "titolo": "Il Mondo",
+      "descrizione": "desc/Il-Mondo.txt",
+      "punteggio": 50.0,
+      "tag_comuni": ["news","intrattenimento"],
+      "link": "https://open.spotify.com",
+      "immagine": "Il-Mondo.jpg"
+    },
+    {
+      "titolo": "Black Box",
+      "descrizione": "desc/Black-Box.txt",
+      "punteggio": 20.0,
+      "tag_comuni": ["news"],
+      "link": "https://open.spotify.com",
+      "immagine": "Black-Box.jpg"
+    },
+    {
+      "titolo": "Pulp Podcast",
+      "descrizione": "desc/Pulp-Podcast.txt",
+      "punteggio": 20.0,
+      "tag_comuni": ["intrattenimento"],
+      "link": "https://open.spotify.com",
+      "immagine": "Pulp-Podcast.jpg"
     }
   ]
 }

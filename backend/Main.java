@@ -19,7 +19,12 @@ class Main{
 
 
         // --- CALCOLO RANKING ---
+         ArrayList<Ranking> ranking = Raccomander.creaRanking(listaPodcast, preferenze);
+        
 
+        // --- SCRITTURA FILE JSON ---
+        String PATH_OUTPUT = "data/output_ranking.json";
+        Scrittura.scriviRankingJSON(ranking, PATH_OUTPUT);
         
 
 

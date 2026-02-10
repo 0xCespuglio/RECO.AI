@@ -17,7 +17,6 @@ public class Lettura {
 
             while ((line = br.readLine()) != null) {
                 String[] s = line.split(",");
-
                 String nome = s[0].replace("\"", "");
                 String descrizione = s[1].replace("\"", "");
                 String[] tags = s[2].replace("\"", "").split(";"); // separatore tag ";"
@@ -37,31 +36,30 @@ public class Lettura {
     // METEDO PER LEGGERE LE PREFERENZE DELL'UTENTE
 
         public static String[] leggiPreferenze(String pathPreferenze) {
+    String[] tags = new String[3];
+    
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(pathPreferenze));
+            StringBuilder jsonContent = new StringBuilder();
+            String line;
 
-            String[] tags = new String[3];
-            
-            try {
-                BufferedReader br = new BufferedReader(new FileReader(pathPreferenze));
-                StringBuilder jsonContent = new StringBuilder();
-                String line;
-                
-                while ((line = br.readLine()) != null) {
-                    jsonContent.append(line);
-                }
-                br.close();
-                
-                String json = jsonContent.toString();
-                String tagsSection = json.substring(json.indexOf("[") + 1, json.indexOf("]"));
-                tags = tagsSection.split(",");
-                
-                for (int i = 0; i < tags.length; i++) {
-                    tags[i] = tags[i].trim().replace("\"", "");
-                }
-                
-            } catch (IOException e) {
-                e.printStackTrace();
+            while ((line = br.readLine()) != null) {
+                jsonContent.append(line);
             }
-            
-            return tags;
+            br.close();
+
+            String json = jsonContent.toString();
+            String tagsSection = json.substring(json.indexOf("[") + 1, json.indexOf("]"));
+            String[] parti = tagsSection.split(",");  // ✅ Rinominato da tags
+
+            for (int i = 0; i < parti.length && i < 3; i++) {
+                tags[i] = parti[i].trim().replace("\"", "");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+        return tags;
+}
 }

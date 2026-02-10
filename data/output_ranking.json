@@ -4,11 +4,7 @@
       "titolo": "Muschio Selvaggio",
       "descrizione": "desc/Muschio-Selvaggio.txt",
       "punteggio": 80.0,
-      "tag_comuni": [
-        "sviluppo personale",
-        "psicologia maschile",
-        "mindset"
-      ],
+      "tag_comuni": ["sviluppo personale","psicologia maschile","mindset"],
       "link": "https://open.spotify.com",
       "immagine": "Muschio-Selvaggio.jpg"
     },

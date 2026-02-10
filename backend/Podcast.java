@@ -1,14 +1,13 @@
 
-
 class Podcast {
-    // --- ATTRIBUTI ---
+    // ATTRIBUTI 
     String nome;
     String descrizione;
     String[] tags;
     String link;
     String immagine;
     
-    // --- COSTRUTTORE ---
+    // COSTRUTTORE 
     Podcast(String nome, String descrizione, String[] tags, String link, String immagine){
         this.nome = nome;
         this.descrizione = descrizione;
@@ -17,7 +16,7 @@ class Podcast {
         this.immagine = immagine;
     }
 
-    // --- GETTER ---
+    // GETTER 
     public String getNome() {
         return nome;
     }

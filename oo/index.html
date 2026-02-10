@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PodcastMatch • Scopri i podcast perfetti per te</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>PodcastMatch</h1>
+            <p class="subtitle">Scopri i podcast perfetti per te in base alle tue passioni e interessi</p>
+        </header>
+
+        <div class="category">
+            <h2 class="category-title">Seleziona le tematiche che ti interessano</h2>
+            <div class="tags-grid" id="tematicheGrid">
+                <div class="tag" data-value="intrattenimento">
+                    <i class="fas fa-film"></i>
+                    <span>Intrattenimento</span>
+                </div>
+                <div class="tag" data-value="cultura">
+                    <i class="fas fa-landmark"></i>
+                    <span>Cultura</span>
+                </div>
+                <div class="tag" data-value="interviste">
+                    <i class="fas fa-microphone-alt"></i>
+                    <span>Interviste</span>
+                </div>
+                <div class="tag" data-value="attualita">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Attualità</span>
+                </div>
+                <div class="tag" data-value="politica">
+                    <i class="fas fa-balance-scale"></i>
+                    <span>Politica</span>
+                </div>
+                <div class="tag" data-value="satira">
+                    <i class="fas fa-theater-masks"></i>
+                    <span>Satira</span>
+                </div>
+                <div class="tag" data-value="storie-vita">
+                    <i class="fas fa-book-open"></i>
+                    <span>Storie di vita</span>
+                </div>
+                <div class="tag" data-value="cultura-pop">
+                    <i class="fas fa-star"></i>
+                    <span>Cultura pop</span>
+                </div>
+                <div class="tag" data-value="umorismo">
+                    <i class="fas fa-laugh"></i>
+                    <span>Umorismo</span>
+                </div>
+                <div class="tag" data-value="crime">
+                    <i class="fas fa-search"></i>
+                    <span>Crime</span>
+                </div>
+                <div class="tag" data-value="mistero">
+                    <i class="fas fa-moon"></i>
+                    <span>Mistero</span>
+                </div>
+                <div class="tag" data-value="narrazione">
+                    <i class="fas fa-book-reader"></i>
+                    <span>Narrazione</span>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 24px; color: var(--text-tertiary); font-size: 0.95rem;">
+                <i class="fas fa-info-circle"></i> Puoi selezionare tutte le tematiche che preferisci
+            </p>
+        </div>
+
+        <div class="actions">
+            <button class="btn-submit" id="submitBtn">
+                <i class="fas fa-magic"></i>
+                Trova i miei podcast
+            </button>
+            <button class="btn-reset" id="resetBtn">
+                <i class="fas fa-redo"></i>
+                Azzera tutto
+            </button>
+        </div>
+
+        <div class="algorithm-steps" id="algorithmSteps">
+            <div class="steps-title">
+                <i class="fas fa-cogs"></i>
+                Elaborazione in corso...
+            </div>
+            <div class="steps-list" id="stepsList"></div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tags = document.querySelectorAll('.tag');
+        const selected = new Set();
+
+        // Aggiungi icone mancanti dinamicamente
+        tags.forEach(tag => {
+            if (!tag.querySelector('i')) {
+                const icon = document.createElement('i');
+                icon.className = 'fas fa-hashtag';
+                tag.prepend(icon);
+            }
+        });
+
+        // Selezione tag
+        tags.forEach(tag => {
+            tag.onclick = () => {
+                tag.classList.toggle('selected');
+                const val = tag.dataset.value;
+                selected.has(val) ? selected.delete(val) : selected.add(val);
+
+                // Feedback tattile
+                tag.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    tag.style.transform = '';
+                }, 150);
+            };
+        });
+
+        // Reset
+        document.getElementById('resetBtn').onclick = () => {
+            tags.forEach(t => {
+                t.classList.remove('selected');
+                t.style.animation = 'shake 0.5s ease';
+                setTimeout(() => {
+                    t.style.animation = '';
+                }, 500);
+            });
+            selected.clear();
+        };
+
+        // Submit
+        document.getElementById('submitBtn').onclick = () => {
+            if (selected.size === 0) {
+                alert("Per favore seleziona almeno un tema per continuare!");
+                return;
+            }
+
+            // Salva preferenze
+            localStorage.setItem('userPreferences', JSON.stringify({
+                tematiche: Array.from(selected),
+                timestamp: new Date().toISOString()
+            }));
+
+            // Mostra animazione
+            const stepsDiv = document.getElementById('algorithmSteps');
+            const stepsList = document.getElementById('stepsList');
+            const progressFill = document.getElementById('progressFill');
+
+            stepsDiv.classList.add('visible');
+            stepsList.innerHTML = '';
+            progressFill.style.width = '0%';
+
+            // Steps animati
+            const steps = [
+                { icon: '🔍', text: 'Analisi delle tue preferenze...', delay: 600 },
+                { icon: '📊', text: 'Calcolo coefficiente di Jaccard...', delay: 1300 },
+                { icon: '🤖', text: 'Applicazione algoritmo di matching...', delay: 2000 },
+                { icon: '🎯', text: 'Identificazione podcast più rilevanti...', delay: 2700 },
+                { icon: '✨', text: 'Generazione consigli personalizzati...', delay: 3400 }
+            ];
+
+            steps.forEach((step, i) => {
+                setTimeout(() => {
+                    const div = document.createElement('div');
+                    div.className = 'step-item';
+                    div.innerHTML = `<span class="step-icon">${step.icon}</span> ${step.text}`;
+                    stepsList.appendChild(div);
+
+                    // Completa lo step precedente
+                    if (i > 0) {
+                        stepsList.children[i - 1].classList.add('completed');
+                    }
+
+                    // Aggiorna progress bar
+                    progressFill.style.width = `${((i + 1) / steps.length * 100)}%`;
+
+                    // Ultimo step: reindirizza
+                    if (i === steps.length - 1) {
+                        setTimeout(() => {
+                            div.classList.add('completed');
+                            setTimeout(() => {
+                                window.location.href = 'results.html';
+                            }, 800);
+                        }, 500);
+                    }
+                }, step.delay);
+            });
+        };
+
+        // Aggiungi stile per l'animazione shake
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>

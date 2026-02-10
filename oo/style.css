@@ -698,3 +698,105 @@ button {
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
 }
+
+/* Aggiungi al file style.css esistente */
+
+/* Ottimizzazione griglia per più tag */
+@media (min-width: 768px) {
+    .tags-grid {
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .tags-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+}
+
+/* Ottimizzazione per mobile */
+@media (max-width: 767px) {
+    .tags-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .tag {
+        padding: 16px 12px;
+        font-size: 0.9rem;
+    }
+
+    .tag i {
+        font-size: 1rem;
+        margin-bottom: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .category {
+        padding: 20px;
+    }
+
+    .tags-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 10px;
+        padding-bottom: 10px;
+        scrollbar-width: thin;
+    }
+
+    .tags-grid::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .tags-grid::-webkit-scrollbar-thumb {
+        background: var(--accent-primary);
+        border-radius: 2px;
+    }
+
+    .tag {
+        flex: 0 0 auto;
+        width: 140px;
+    }
+}
+
+/* Aggiungi alla fine del tuo style.css */
+
+/* Stile per immagini mancanti */
+.img-stondata-card,
+.modal-image {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    position: relative;
+}
+
+.img-stondata-card::after,
+.modal-image::after {
+    content: attr(alt);
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.podcast-card img {
+    transition: all 0.3s ease;
+}
+
+.podcast-card:hover img {
+    transform: scale(1.08) rotate(2deg);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}

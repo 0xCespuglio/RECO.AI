@@ -23,6 +23,7 @@
         <div class="category">
             <h2 class="category-title">Seleziona le tematiche che ti interessano</h2>
             <div class="tags-grid" id="tematicheGrid">
+                <!-- Tematiche originali -->
                 <div class="tag" data-value="intrattenimento">
                     <i class="fas fa-film"></i>
                     <span>Intrattenimento</span>
@@ -71,6 +72,116 @@
                     <i class="fas fa-book-reader"></i>
                     <span>Narrazione</span>
                 </div>
+
+                <!-- Nuove categorie -->
+                <div class="tag" data-value="sviluppo-personale">
+                    <i class="fas fa-brain"></i>
+                    <span>Sviluppo personale</span>
+                </div>
+                <div class="tag" data-value="psicologia-maschile">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Psicologia maschile</span>
+                </div>
+                <div class="tag" data-value="mindset">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Mindset</span>
+                </div>
+                <div class="tag" data-value="talk-show">
+                    <i class="fas fa-tv"></i>
+                    <span>Talk show</span>
+                </div>
+                <div class="tag" data-value="cinema">
+                    <i class="fas fa-video"></i>
+                    <span>Cinema</span>
+                </div>
+                <div class="tag" data-value="serie-tv">
+                    <i class="fas fa-tv"></i>
+                    <span>Serie TV</span>
+                </div>
+                <div class="tag" data-value="recensioni">
+                    <i class="fas fa-star-half-alt"></i>
+                    <span>Recensioni</span>
+                </div>
+                <div class="tag" data-value="videogiochi">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Videogiochi</span>
+                </div>
+                <div class="tag" data-value="true-crime">
+                    <i class="fas fa-fingerprint"></i>
+                    <span>True crime</span>
+                </div>
+                <div class="tag" data-value="cronaca-nera">
+                    <i class="fas fa-gavel"></i>
+                    <span>Cronaca nera</span>
+                </div>
+                <div class="tag" data-value="investigazione">
+                    <i class="fas fa-search-plus"></i>
+                    <span>Investigazione</span>
+                </div>
+                <div class="tag" data-value="inchiesta">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Inchiesta</span>
+                </div>
+                <div class="tag" data-value="news">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>News</span>
+                </div>
+                <div class="tag" data-value="storie">
+                    <i class="fas fa-history"></i>
+                    <span>Storie</span>
+                </div>
+                <div class="tag" data-value="storia">
+                    <i class="fas fa-landmark"></i>
+                    <span>Storia</span>
+                </div>
+                <div class="tag" data-value="educativo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Educativo</span>
+                </div>
+                <div class="tag" data-value="economia">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Economia</span>
+                </div>
+                <div class="tag" data-value="finanza">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Finanza</span>
+                </div>
+                <div class="tag" data-value="ispirazione">
+                    <i class="fas fa-fire"></i>
+                    <span>Ispirazione</span>
+                </div>
+                <div class="tag" data-value="commedia">
+                    <i class="fas fa-laugh-beam"></i>
+                    <span>Commedia</span>
+                </div>
+                <div class="tag" data-value="irriverente">
+                    <i class="fas fa-grin-tongue"></i>
+                    <span>Irriverente</span>
+                </div>
+                <div class="tag" data-value="musica">
+                    <i class="fas fa-music"></i>
+                    <span>Musica</span>
+                </div>
+                <div class="tag" data-value="tv-film">
+                    <i class="fas fa-film"></i>
+                    <span>TV / Film</span>
+                </div>
+                <div class="tag" data-value="sintesi">
+                    <i class="fas fa-compress-alt"></i>
+                    <span>Sintesi</span>
+                </div>
+                <div class="tag" data-value="scienze">
+                    <i class="fas fa-flask"></i>
+                    <span>Scienze</span>
+                </div>
+                <div class="tag" data-value="analisi">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Analisi</span>
+                </div>
+                <div class="tag" data-value="societa">
+                    <i class="fas fa-users"></i>
+                    <span>Società</span>
+                </div>
             </div>
             <p style="text-align: center; margin-top: 24px; color: var(--text-tertiary); font-size: 0.95rem;">
                 <i class="fas fa-info-circle"></i> Puoi selezionare tutte le tematiche che preferisci
@@ -103,15 +214,6 @@
     <script>
         const tags = document.querySelectorAll('.tag');
         const selected = new Set();
-
-        // Aggiungi icone mancanti dinamicamente
-        tags.forEach(tag => {
-            if (!tag.querySelector('i')) {
-                const icon = document.createElement('i');
-                icon.className = 'fas fa-hashtag';
-                tag.prepend(icon);
-            }
-        });
 
         // Selezione tag
         tags.forEach(tag => {

@@ -1,57 +1,293 @@
 [
     {
         "id": "muschio-selvaggio",
-        "nome": "Muschio selvaggio",
+        "nome": "Muschio Selvaggio",
         "tematiche": [
             "intrattenimento",
             "cultura",
-            "interviste"
+            "interviste",
+            "sviluppo-personale",
+            "psicologia-maschile",
+            "mindset"
         ],
-        "descrizione_breve": "Muschio Selvaggio è il podcast di Fedez e Luis Sal che affronta temi di attualità, cultura pop e intrattenimento con un taglio ironico e diretto.",
-        "immagine": "https://api.dicebear.com/7.x/avataaars/svg?seed=muschio"
+        "descrizione_breve": "Muschio Selvaggio è il podcast di Fedez e Luis Sal che affronta temi di attualità, cultura pop, sviluppo personale e mindset con un taglio ironico e diretto.",
+        "immagine": "images/Muschio-Selvaggio.jpg"
     },
     {
         "id": "la-zanzara",
-        "nome": "La zanzara",
+        "nome": "La Zanzara",
         "tematiche": [
             "attualita",
             "politica",
-            "satira"
+            "satira",
+            "talk-show",
+            "commedia",
+            "irriverente"
         ],
         "descrizione_breve": "La Zanzara è lo storico programma radiofonico condotto da Giuseppe Cruciani e David Parenzo che affronta temi di attualità e politica con un approccio provocatorio e satirico.",
-        "immagine": "https://api.dicebear.com/7.x/avataaars/svg?seed=zanzara"
+        "immagine": "images/La-Zanzara.jpg"
     },
     {
         "id": "one-more-time",
-        "nome": "One more time",
+        "nome": "One More Time",
         "tematiche": [
             "interviste",
             "storie-vita",
-            "cultura-pop"
+            "cultura-pop",
+            "cinema",
+            "serie-tv",
+            "recensioni"
         ],
-        "descrizione_breve": "One More Time è il podcast di Luca Casadei che racconta storie di vita attraverso interviste profonde e intime.",
-        "immagine": "https://api.dicebear.com/7.x/avataaars/svg?seed=one"
+        "descrizione_breve": "One More Time è il podcast di Luca Casadei che racconta storie di vita attraverso interviste profonde e intime, con focus su cinema e serie TV.",
+        "immagine": "images/One-More-Time.jpg"
     },
     {
         "id": "power-pizza",
-        "nome": "Power pizza podcast",
+        "nome": "Power Pizza Podcast",
         "tematiche": [
+            "cultura-pop",
+            "umorismo",
+            "intrattenimento",
+            "videogiochi",
+            "tv-film",
+            "musica"
+        ],
+        "descrizione_breve": "Power Pizza Podcast esplora la cultura pop con ironia e leggerezza, approfondendo videogiochi, film, serie TV e musica.",
+        "immagine": "images/Power-Pizza-Podcast.jpg"
+    },
+    {
+        "id": "elisa-true-crime",
+        "nome": "Elisa True Crime",
+        "tematiche": [
+            "crime",
+            "mistero",
+            "narrazione",
+            "true-crime",
+            "cronaca-nera",
+            "investigazione"
+        ],
+        "descrizione_breve": "Elisa De Marco racconta casi di cronaca nera e misteri con grande coinvolgimento e rigore investigativo.",
+        "immagine": "images/Elisa-True-Crime.jpg"
+    },
+    {
+        "id": "indagini",
+        "nome": "Indagini",
+        "tematiche": [
+            "crime",
+            "inchiesta",
+            "narrazione",
+            "true-crime",
+            "investigazione"
+        ],
+        "descrizione_breve": "Un podcast che approfondisce casi criminali con accuratezza investigativa e narrazione avvincente.",
+        "immagine": "images/Indagini.jpg"
+    },
+    {
+        "id": "stories",
+        "nome": "Stories",
+        "tematiche": [
+            "news",
+            "attualita",
+            "storie",
+            "narrazione",
+            "societa"
+        ],
+        "descrizione_breve": "Raccolta di storie di attualità raccontate con profondità e sensibilità.",
+        "immagine": "images/Stories.jpg"
+    },
+    {
+        "id": "barbero",
+        "nome": "Barbero",
+        "tematiche": [
+            "storia",
+            "cultura",
+            "educativo",
+            "societa",
+            "analisi"
+        ],
+        "descrizione_breve": "Il professor Alessandro Barbero racconta la storia con passione e competenza, rendendola accessibile a tutti.",
+        "immagine": "images/Barbero.jpg"
+    },
+    {
+        "id": "sei-e-ventitre",
+        "nome": "Sei e Ventitré",
+        "tematiche": [
+            "news",
+            "attualita",
+            "inchiesta",
+            "analisi",
+            "politica"
+        ],
+        "descrizione_breve": "Analisi approfondita delle notizie del giorno con inchieste e approfondimenti.",
+        "immagine": "images/Sei-e-Ventitre.jpg"
+    },
+    {
+        "id": "black-box",
+        "nome": "Black Box",
+        "tematiche": [
+            "economia",
+            "news",
+            "finanza",
+            "analisi",
+            "educativo"
+        ],
+        "descrizione_breve": "Economia e finanza spiegate in modo chiaro e accessibile, con focus sugli eventi più importanti.",
+        "immagine": "images/Black-Box.jpg"
+    },
+    {
+        "id": "passa-dal-bsmt",
+        "nome": "Passa dal BSMT",
+        "tematiche": [
+            "cultura",
+            "storie",
+            "ispirazione",
+            "societa",
+            "interviste"
+        ],
+        "descrizione_breve": "Storie di vita ispiratrici e incontri con personaggi interessanti della cultura contemporanea.",
+        "immagine": "images/Passa-dal-BSMT.jpg"
+    },
+    {
+        "id": "the-bull",
+        "nome": "The Bull",
+        "tematiche": [
+            "finanza",
+            "economia",
+            "educativo",
+            "analisi",
+            "news"
+        ],
+        "descrizione_breve": "Tutto sui mercati finanziari, investimenti e economia globale spiegati in modo semplice.",
+        "immagine": "images/The-Bull.jpg"
+    },
+    {
+        "id": "non-hanno-un-amico",
+        "nome": "Non hanno un amico",
+        "tematiche": [
+            "satira",
+            "commedia",
+            "irriverente",
+            "umorismo",
+            "societa"
+        ],
+        "descrizione_breve": "Satira sociale e politica con uno stile irriverente e divertente.",
+        "immagine": "images/Non-hanno-un-amico.jpg"
+    },
+    {
+        "id": "tintoria",
+        "nome": "Tintoria",
+        "tematiche": [
+            "commedia",
+            "interviste",
             "cultura-pop",
             "umorismo",
             "intrattenimento"
         ],
-        "descrizione_breve": "Power Pizza Podcast esplora la cultura pop con ironia e leggerezza.",
-        "immagine": "https://api.dicebear.com/7.x/avataaars/svg?seed=pizza"
+        "descrizione_breve": "Interviste informali a personaggi dello spettacolo con tante risate e aneddoti.",
+        "immagine": "images/Tintoria.jpg"
     },
     {
-        "id": "elisa-true-crime",
-        "nome": "Elisa true crime",
+        "id": "supernova",
+        "nome": "Supernova",
         "tematiche": [
-            "crime",
-            "mistero",
-            "narrazione"
+            "cultura",
+            "musica",
+            "tv-film",
+            "cultura-pop",
+            "intrattenimento"
         ],
-        "descrizione_breve": "Elisa De Marco racconta casi di cronaca nera e misteri con grande coinvolgimento.",
-        "immagine": "https://api.dicebear.com/7.x/avataaars/svg?seed=crime"
+        "descrizione_breve": "Un viaggio nella cultura pop tra musica, cinema e serie TV.",
+        "immagine": "images/Supernova.jpg"
+    },
+    {
+        "id": "pulp-podcast",
+        "nome": "Pulp Podcast",
+        "tematiche": [
+            "cultura-pop",
+            "interviste",
+            "intrattenimento",
+            "musica",
+            "tv-film"
+        ],
+        "descrizione_breve": "Interviste esclusive con protagonisti della cultura pop e dello spettacolo.",
+        "immagine": "images/Pulp-Podcast.jpg"
+    },
+    {
+        "id": "the-essential",
+        "nome": "The Essential",
+        "tematiche": [
+            "news",
+            "attualita",
+            "sintesi",
+            "analisi",
+            "educativo"
+        ],
+        "descrizione_breve": "Le notizie essenziali del giorno in pochi minuti, con analisi concise.",
+        "immagine": "images/The-Essential.jpg"
+    },
+    {
+        "id": "geopop",
+        "nome": "Geopop",
+        "tematiche": [
+            "scienze",
+            "educativo",
+            "cultura",
+            "analisi",
+            "news"
+        ],
+        "descrizione_breve": "Scienza e curiosità spiegate in modo semplice e divertente.",
+        "immagine": "images/Geopop.jpg"
+    },
+    {
+        "id": "il-mondo",
+        "nome": "Il Mondo",
+        "tematiche": [
+            "news",
+            "intrattenimento",
+            "analisi",
+            "attualita",
+            "societa"
+        ],
+        "descrizione_breve": "Analisi geopolitica e attualità internazionale con approfondimenti.",
+        "immagine": "images/Il-Mondo.jpg"
+    },
+    {
+        "id": "non-aprite-quella-podcast",
+        "nome": "Non aprite quella podcast",
+        "tematiche": [
+            "satira",
+            "crime",
+            "commedia",
+            "umorismo",
+            "intrattenimento"
+        ],
+        "descrizione_breve": "Un mix di satira, crime e comedia per un intrattenimento ironico e leggero.",
+        "immagine": "images/Non-aprite-quella-podcast.jpg"
+    },
+    {
+        "id": "podcast-giacomo-poretti",
+        "nome": "Podcast Giacomo Poretti",
+        "tematiche": [
+            "cultura",
+            "societa",
+            "umorismo",
+            "interviste",
+            "storie-vita"
+        ],
+        "descrizione_breve": "Giacomo Poretti affronta temi culturali e sociali con ironia e profondità.",
+        "immagine": "images/Podcast-Giacomo-Poretti.jpg"
+    },
+    {
+        "id": "squali",
+        "nome": "Squali",
+        "tematiche": [
+            "finanza",
+            "storie",
+            "cultura",
+            "economia",
+            "analisi"
+        ],
+        "descrizione_breve": "Storie di finanza, economia e cultura d'impresa raccontate in modo avvincente.",
+        "immagine": "images/Squali.jpg"
     }
 ]

@@ -1,25 +1,22 @@
 
-
 class Podcast {
-    // --- ATTRIBUTI ---
+    // ATTRIBUTI 
     String nome;
     String descrizione;
     String[] tags;
-    double[] pesi;
     String link;
     String immagine;
     
-    // --- COSTRUTTORE ---
-    Podcast(String nome, String descrizione, String[] tags, double[] pesi, String link, String immagine){
+    // COSTRUTTORE 
+    Podcast(String nome, String descrizione, String[] tags, String link, String immagine){
         this.nome = nome;
         this.descrizione = descrizione;
         this.tags = tags;
-        this.pesi = pesi;
         this.link = link;
         this.immagine = immagine;
     }
 
-    // --- GETTER ---
+    // GETTER 
     public String getNome() {
         return nome;
     }
@@ -30,10 +27,6 @@ class Podcast {
 
     public String[] getTags() {
         return tags;
-    }
-
-    public double[] getPesi() {
-        return pesi;
     }
 
     public String getLink() {
@@ -55,10 +48,6 @@ class Podcast {
     
     public void setTags(String[] tags) {
         this.tags = tags;
-    }
-    
-    public void setPesi(double[] pesi) {
-        this.pesi = pesi;
     }
     
     public void setLink(String link) {

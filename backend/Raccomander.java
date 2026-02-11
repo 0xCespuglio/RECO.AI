@@ -34,7 +34,7 @@ public class Raccomander {
         unione.addAll(setTags);
         
         // Evita divisione per zero
-        if (unione.size() == 0) {
+        if (unione.isEmpty()) {
             return 0.0;
         }
         
@@ -64,7 +64,7 @@ public class Raccomander {
             }
         }
         
-        return tagComuni.toArray(new String[0]);
+        return tagComuni.toArray(String[]::new);
     }
     
     /**

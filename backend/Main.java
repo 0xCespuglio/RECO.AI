@@ -3,7 +3,7 @@
 
 import java.util.ArrayList;
 
-class Main{
+public class Main{
     public static void main(String[] args) {
 
         // --- LETTURA FILE CATALOGO PODCAST ---

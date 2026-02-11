@@ -1,5 +1,4 @@
-
-class Podcast {
+public class Podcast {
     // ATTRIBUTI 
     String nome;
     String descrizione;

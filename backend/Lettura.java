@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.*;
 
 public class Lettura {
     
@@ -30,7 +31,8 @@ public class Lettura {
 
         } catch (IOException e) {
             System.out.println("Errore durante la lettura di \"" + pathCatalogo + "\"!");
-            e.printStackTrace();
+            Logger logger = Logger.getLogger(Lettura.class.getName());
+            logger.log(Level.SEVERE, "Errore", e);
             
         }
 
@@ -42,8 +44,7 @@ public class Lettura {
     public static String[] leggiPreferenze(String pathPreferenze) {
         String[] tags = new String[3];
     
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(pathPreferenze));
+        try (BufferedReader br = new BufferedReader(new FileReader(pathPreferenze))) {
             StringBuilder jsonContent = new StringBuilder();
             String line;
 
@@ -64,7 +65,8 @@ public class Lettura {
             
         } catch (IOException e) {
             System.out.println("Errore durante la lettura di \"" + pathPreferenze + "\"!");
-            e.printStackTrace();
+            Logger logger = Logger.getLogger(Lettura.class.getName());
+            logger.log(Level.SEVERE, "Errore", e);
         }
 
         return tags;

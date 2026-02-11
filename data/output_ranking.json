@@ -1,68 +1,100 @@
 {
   "ranking": [
     {
-      "titolo": "Stories",
-      "descrizione": "desc/Stories.txt",
-      "punteggio": 100.0,
-      "tag_comuni": ["news","storie","attualità"],
-      "link": "https://open.spotify.com",
-      "immagine": "Stories.jpg"
-    },
-    {
-      "titolo": "SEIETRENTA",
-      "descrizione": "desc/SeieTrenta.txt",
+      "titolo": "Passa dal BSMT",
+      "descrizione": "desc/Passa-dal-BSMT.txt",
       "punteggio": 50.0,
-      "tag_comuni": ["news","attualità"],
+      "tag_comuni": ["cultura","interviste"],
       "link": "https://open.spotify.com",
-      "immagine": "SeieTrenta.jpg"
+      "immagine": "Passa-dal-BSMT.jpg"
     },
     {
-      "titolo": "La Zanzara",
-      "descrizione": "desc/La-Zanzara.txt",
-      "punteggio": 50.0,
-      "tag_comuni": ["news","attualità"],
-      "link": "https://open.spotify.com",
-      "immagine": "La-Zanzara.jpg"
-    },
-    {
-      "titolo": "The Essential",
-      "descrizione": "desc/The-Essential.txt",
-      "punteggio": 50.0,
-      "tag_comuni": ["news","attualità"],
-      "link": "https://open.spotify.com",
-      "immagine": "The-Essential.jpg"
-    },
-    {
-      "titolo": "Black Box",
-      "descrizione": "desc/Black-Box.txt",
+      "titolo": "Il podcast di Alessandro Barbero: Lezioni e Conferenze di Storia",
+      "descrizione": "desc/Barbero.txt",
       "punteggio": 20.0,
-      "tag_comuni": ["news"],
+      "tag_comuni": ["cultura"],
       "link": "https://open.spotify.com",
-      "immagine": "Black-Box.jpg"
+      "immagine": "Barbero.jpg"
+    },
+    {
+      "titolo": "Tintoria",
+      "descrizione": "desc/Tintoria.txt",
+      "punteggio": 20.0,
+      "tag_comuni": ["interviste"],
+      "link": "https://open.spotify.com",
+      "immagine": "Tintoria.jpg"
+    },
+    {
+      "titolo": "One More Time",
+      "descrizione": "desc/One-More-Time.txt",
+      "punteggio": 20.0,
+      "tag_comuni": ["interviste"],
+      "link": "https://open.spotify.com",
+      "immagine": "One-More-Time.jpg"
+    },
+    {
+      "titolo": "Supernova",
+      "descrizione": "desc/Supernova.txt",
+      "punteggio": 20.0,
+      "tag_comuni": ["cultura"],
+      "link": "https://open.spotify.com",
+      "immagine": "Supernova.jpg"
     },
     {
       "titolo": "Pulp Podcast",
       "descrizione": "desc/Pulp-Podcast.txt",
       "punteggio": 20.0,
-      "tag_comuni": ["attualità"],
+      "tag_comuni": ["interviste"],
       "link": "https://open.spotify.com",
       "immagine": "Pulp-Podcast.jpg"
     },
     {
-      "titolo": "Il Mondo",
-      "descrizione": "desc/Il-Mondo.txt",
+      "titolo": "Geopop",
+      "descrizione": "desc/Geopop.txt",
       "punteggio": 20.0,
-      "tag_comuni": ["news"],
+      "tag_comuni": ["cultura"],
       "link": "https://open.spotify.com",
-      "immagine": "Il-Mondo.jpg"
+      "immagine": "Geopop.jpg"
+    },
+    {
+      "titolo": "PodCast di Giacomo Poretti",
+      "descrizione": "desc/Podcast-Giacomo-Poretti.txt",
+      "punteggio": 20.0,
+      "tag_comuni": ["interviste"],
+      "link": "https://open.spotify.com",
+      "immagine": "Podcast-Giacomo-Poretti.jpg"
     },
     {
       "titolo": "Squali",
       "descrizione": "desc/Squali.txt",
       "punteggio": 20.0,
-      "tag_comuni": ["storie"],
+      "tag_comuni": ["cultura"],
       "link": "https://open.spotify.com",
       "immagine": "Squali.jpg"
+    },
+    {
+      "titolo": "Din Don Down",
+      "descrizione": "desc/Din-Don-Down.txt",
+      "punteggio": 20.0,
+      "tag_comuni": ["interviste"],
+      "link": "https://open.spotify.com",
+      "immagine": "Din-Don-Down.jpg "
+    },
+    {
+      "titolo": "Capiamo",
+      "descrizione": "desc/Capiamo.txt",
+      "punteggio": 20.0,
+      "tag_comuni": ["cultura"],
+      "link": "https://open.spotify.com",
+      "immagine": "Capiamo.jpg"
+    },
+    {
+      "titolo": "Streetsmart",
+      "descrizione": "desc/Streetsmart.txt",
+      "punteggio": 20.0,
+      "tag_comuni": ["cultura pop"],
+      "link": "https://open.spotify.com",
+      "immagine": "Streetsmart.jpg"
     }
   ]
 }

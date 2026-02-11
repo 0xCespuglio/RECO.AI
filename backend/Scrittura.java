@@ -2,6 +2,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.logging.*;
 
 public class Scrittura {
     
@@ -51,7 +52,10 @@ public class Scrittura {
             
         } catch (IOException e) {
             System.err.println("Errore durante la scrittura di \"" + pathOutput + "\"!");
-            e.printStackTrace();
+            Logger logger = Logger.getLogger(Scrittura.class.getName());
+            logger.log(Level.SEVERE, "Errore", e);
+
         }
+    
     }
 }

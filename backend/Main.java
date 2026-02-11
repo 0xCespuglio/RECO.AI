@@ -19,7 +19,7 @@ class Main{
 
 
         // --- CALCOLO RANKING ---
-         ArrayList<Ranking> ranking = Raccomander.creaRanking(listaPodcast, preferenze);
+        ArrayList<Ranking> ranking = Raccomander.creaRanking(listaPodcast, preferenze);
         
 
         // --- SCRITTURA FILE JSON ---

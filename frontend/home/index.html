@@ -1,27 +1,466 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RECO.AI - Raccomandazione Podcast</title>
+    <title>PodcastMatch • I tuoi consigli personalizzati</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-    <div>
-        <h1>RECO.AI - Raccomandazione Podcast</h1>
-        <p>Basato sulle tue preferenze, ecco i podcast consigliati:</p>
+    <div class="container">
+        <header class="header">
+            <h1>I tuoi podcast consigliati</h1>
+            <p class="subtitle">Basati sulle tue preferenze e ordinati per affinità</p>
+        </header>
+
+        <!-- Elementi di caricamento e errore -->
+        <div id="loading" style="text-align: center; padding: 40px;">
+            <div style="margin-bottom: 20px; font-size: 3rem; color: var(--accent-primary);">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+            <h2 style="color: var(--text-primary); margin-bottom: 10px;">Caricamento dei podcast...</h2>
+            <p style="color: var(--text-secondary);">Stiamo analizzando le tue preferenze per trovare i podcast perfetti per te.</p>
+        </div>
+
+        <div id="error" style="display: none; text-align: center; padding: 40px; background: #fef2f2; border-radius: var(--radius-md); border: 2px solid #fecaca;">
+            <div style="margin-bottom: 20px; font-size: 3rem; color: #dc2626;">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h2 style="color: #991b1b; margin-bottom: 10px;">Si è verificato un errore</h2>
+            <p id="error-message" style="color: #7f1d1d; max-width: 600px; margin: 0 auto 20px;"></p>
+            <button onclick="location.reload()" style="background: var(--accent-primary); color: white; border: none; padding: 12px 24px; border-radius: var(--radius-md); cursor: pointer; font-weight: 600;">
+                <i class="fas fa-redo"></i> Riprova
+            </button>
+        </div>
+<div class="results-container" id="podcasts-container">
+    <!-- I podcast verranno inseriti qui dinamicamente -->
+</div>
+<button class="btn-back" onclick="window.location.href='../preferenze/preferenze.html'">
+    <i class="fas fa-arrow-left"></i>
+    Torna alla selezione
+</button>
+    <div class="modal" id="modal">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <img id="modalImage" class="modal-image" src="" alt="">
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <div class="modal-compatibility" id="modalCompatibility"></div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3><i class="fas fa-info-circle"></i> Di cosa tratta</h3>
+                    <p id="modalDescription"></p>
+                </div>
+                <div class="modal-section">
+                    <h3><i class="fas fa-tags"></i> Tematiche</h3>
+                    <div class="modal-tags" id="modalTags"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div id="loading">
-        <p>Caricamento dati in corso...</p>
-    </div>
+    <script>
+        /**
+         * RECO.AI - Sistema di Raccomandazione Podcast
+         * Script principale per caricamento e visualizzazione dei podcast
+         */
 
-    <div id="error" style="display: none; color: red; border: 2px solid red; padding: 10px;">
-        <h3>Errore</h3>
-        <p id="error-message"></p>
-    </div>
+        // Elementi DOM principali
+        let podcastsContainer = null;
+        let loadingElement = null;
+        let errorElement = null;
+        let errorMessageElement = null;
+        let modal = null;
 
-    <div id="podcasts-container"></div>
+        /**
+         * Funzione principale eseguita al caricamento della pagina
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Inizializzazione RECO.AI...');
+            
+            // Inizializza gli elementi DOM
+            initDOMElements();
+            
+            // Carica i dati dei podcast
+            loadPodcasts();
+        });
 
-    <script src="script.js"></script>
+        /**
+         * Inizializza i riferimenti agli elementi DOM
+         */
+        function initDOMElements() {
+            podcastsContainer = document.getElementById('podcasts-container');
+            loadingElement = document.getElementById('loading');
+            errorElement = document.getElementById('error');
+            errorMessageElement = document.getElementById('error-message');
+            modal = document.getElementById('modal');
+            
+            if (!podcastsContainer) {
+                console.error('Elemento #podcasts-container non trovato!');
+            }
+        }
+
+        /**
+         * Carica i dati dei podcast dal file JSON
+         */
+        async function loadPodcasts() {
+            try {
+                console.log('Caricamento dati da output_ranking.json...');
+                
+                // Effettua la richiesta al file JSON
+                const response = await fetch('../../data/output_ranking.json');
+                
+                // Controlla se la risposta è valida
+                if (!response.ok) {
+                    throw new Error(`Errore HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                // Parsing dei dati JSON
+                const data = await response.json();
+                
+                // Controlla la struttura dei dati
+                if (!data.ranking || !Array.isArray(data.ranking)) {
+                    throw new Error('Formato JSON non valido: proprietà "ranking" mancante o non array');
+                }
+                
+                console.log(`Dati caricati: ${data.ranking.length} podcast trovati`);
+                
+                // Nascondi il messaggio di caricamento
+                hideLoading();
+                
+                // Visualizza i podcast
+                displayPodcasts(data.ranking);
+                
+            } catch (error) {
+                console.error('Errore nel caricamento dei podcast:', error);
+                showError(`Impossibile caricare i dati: ${error.message}`);
+            }
+        }
+
+        /**
+         * Nasconde il messaggio di caricamento
+         */
+        function hideLoading() {
+            if (loadingElement) {
+                loadingElement.style.display = 'none';
+            }
+        }
+
+        /**
+         * Mostra un messaggio di errore
+         * @param {string} message - Messaggio di errore da visualizzare
+         */
+        function showError(message) {
+            hideLoading();
+            
+            if (errorElement && errorMessageElement) {
+                errorMessageElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+        }
+
+        /**
+         * Visualizza i podcast nella pagina
+         * @param {Array} podcasts - Array di podcast da visualizzare
+         */
+        function displayPodcasts(podcasts) {
+            if (!podcastsContainer) {
+                console.error('Contenitore podcast non disponibile');
+                return;
+            }
+            
+            // Svuota il contenitore
+            podcastsContainer.innerHTML = '';
+            
+            // Se non ci sono podcast, mostra messaggio
+            if (podcasts.length === 0) {
+                podcastsContainer.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 40px;">Nessun podcast disponibile.</p>';
+                return;
+            }
+            
+            // Crea e aggiunge ogni podcast
+            podcasts.forEach((podcast, index) => {
+                const podcastElement = createPodcastElement(podcast, index + 1);
+                podcastsContainer.appendChild(podcastElement);
+            });
+            
+            console.log(`Visualizzati ${podcasts.length} podcast`);
+        }
+
+        /**
+         * Crea l'elemento HTML per un singolo podcast
+         * @param {Object} podcast - Dati del podcast
+         * @param {number} position - Posizione nella classifica
+         * @returns {HTMLElement} Elemento DOM del podcast
+         */
+        function createPodcastElement(podcast, position) {
+            // Crea l'elemento principale
+            const podcastDiv = document.createElement('div');
+            podcastDiv.className = 'podcast-card';
+            
+            // Titolo del podcast
+            const title = document.createElement('h3');
+            title.textContent = podcast.titolo;
+            
+            // Punteggio di affinità (badge)
+            const scoreBadge = document.createElement('div');
+            scoreBadge.className = 'score-badge';
+            scoreBadge.textContent = `${podcast.punteggio}%`;
+            scoreBadge.style.background = getScoreGradient(podcast.punteggio);
+            
+            // Immagine del podcast
+            const imageContainer = document.createElement('div');
+            imageContainer.style.textAlign = 'center';
+            imageContainer.style.marginBottom = '20px';
+            
+            const img = document.createElement('img');
+            img.className = 'img-stondata-card';
+            img.src = podcast.immagine || '';
+            img.alt = `Copertina di ${podcast.titolo}`;
+            img.style.backgroundColor = '#e4e8f0';
+            img.style.display = 'flex';
+            img.style.alignItems = 'center';
+            img.style.justifyContent = 'center';
+            img.style.color = 'var(--text-secondary)';
+            img.style.fontSize = '2rem';
+            
+            // Gestione errore caricamento immagine
+            img.onerror = function() {
+                console.warn(`Immagine non trovata: ${podcast.immagine}`);
+                this.style.display = 'none';
+                
+                const fallback = document.createElement('div');
+                fallback.style.width = '120px';
+                fallback.style.height = '120px';
+                fallback.style.borderRadius = '50%';
+                fallback.style.background = 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))';
+                fallback.style.display = 'flex';
+                fallback.style.alignItems = 'center';
+                fallback.style.justifyContent = 'center';
+                fallback.style.color = 'white';
+                fallback.style.fontSize = '2rem';
+                fallback.style.margin = '0 auto 24px';
+                fallback.innerHTML = '<i class="fas fa-podcast"></i>';
+                
+                imageContainer.appendChild(fallback);
+            };
+            
+            imageContainer.appendChild(img);
+            
+            // Posizione nella classifica
+            const positionBadge = document.createElement('div');
+            positionBadge.className = 'score-badge';
+            positionBadge.textContent = `#${position}`;
+            positionBadge.style.position = 'absolute';
+            positionBadge.style.top = '20px';
+            positionBadge.style.left = '20px';
+            positionBadge.style.background = 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))';
+            
+            // Tag in comune
+            const tagsDiv = document.createElement('div');
+            tagsDiv.className = 'modal-tags';
+            tagsDiv.style.margin = '15px 0';
+            
+            if (podcast.tag_comuni && podcast.tag_comuni.length > 0) {
+                podcast.tag_comuni.forEach(tag => {
+                    const tagSpan = document.createElement('span');
+                    tagSpan.className = 'tag-mini';
+                    tagSpan.textContent = tag;
+                    tagsDiv.appendChild(tagSpan);
+                });
+            } else {
+                const noTagsSpan = document.createElement('span');
+                noTagsSpan.className = 'tag-mini';
+                noTagsSpan.textContent = 'Nessun tag in comune';
+                noTagsSpan.style.opacity = '0.7';
+                tagsDiv.appendChild(noTagsSpan);
+            }
+            
+            // Descrizione
+            const description = document.createElement('p');
+            if (podcast.descrizione && podcast.descrizione.endsWith('.txt')) {
+                description.textContent = `Descrizione disponibile nel file: ${podcast.descrizione}`;
+                description.style.fontStyle = 'italic';
+                description.style.color = 'var(--text-secondary)';
+            } else if (podcast.descrizione) {
+                description.textContent = podcast.descrizione;
+                description.style.color = 'var(--text-secondary)';
+            }
+            
+            // Link al podcast
+            const linkContainer = document.createElement('div');
+            linkContainer.style.marginTop = '20px';
+            linkContainer.style.textAlign = 'center';
+            
+            const link = document.createElement('a');
+            link.href = podcast.link;
+            link.target = '_blank';
+            link.style.display = 'inline-flex';
+            link.style.alignItems = 'center';
+            link.style.justifyContent = 'center';
+            link.style.gap = '8px';
+            link.style.backgroundColor = '#1DB954'; // Verde Spotify
+            link.style.color = 'white';
+            link.style.padding = '12px 24px';
+            link.style.textDecoration = 'none';
+            link.style.borderRadius = 'var(--radius-md)';
+            link.style.fontWeight = '600';
+            link.style.transition = 'all var(--transition-fast)';
+            
+            link.innerHTML = '<i class="fab fa-spotify"></i> Ascolta su Spotify';
+            
+            link.onmouseover = function() {
+                this.style.transform = 'translateY(-2px)';
+                this.style.boxShadow = 'var(--shadow-md)';
+            };
+            
+            link.onmouseout = function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = 'none';
+            };
+            
+            linkContainer.appendChild(link);
+            
+            // Assemblare tutti gli elementi
+            podcastDiv.appendChild(positionBadge);
+            podcastDiv.appendChild(scoreBadge);
+            podcastDiv.appendChild(imageContainer);
+            podcastDiv.appendChild(title);
+            podcastDiv.appendChild(tagsDiv);
+            
+            if (description.textContent) {
+                podcastDiv.appendChild(description);
+            }
+            
+            podcastDiv.appendChild(linkContainer);
+            
+            // Aggiungi evento click per aprire il modal
+            podcastDiv.addEventListener('click', () => {
+                openModal(podcast);
+            });
+            
+            return podcastDiv;
+        }
+
+        /**
+         * Restituisce il gradiente di colore in base al punteggio di affinità
+         * @param {number} score - Punteggio da 0 a 100
+         * @returns {string} Gradiente CSS
+         */
+        function getScoreGradient(score) {
+            if (score >= 80) return 'linear-gradient(135deg, #10b981, #34d399)'; // Verde
+            if (score >= 60) return 'linear-gradient(135deg, #f59e0b, #fbbf24)'; // Arancione
+            if (score >= 40) return 'linear-gradient(135deg, #f97316, #fb923c)'; // Arancione scuro
+            return 'linear-gradient(135deg, #ef4444, #f87171)'; // Rosso
+        }
+
+        /**
+         * Apre il modal con i dettagli del podcast
+         * @param {Object} podcast - Dati del podcast
+         */
+        function openModal(podcast) {
+            if (!modal) return;
+            
+            // Popola i campi del modal
+            document.getElementById('modalTitle').textContent = podcast.titolo;
+            document.getElementById('modalCompatibility').textContent = `${podcast.punteggio}% affinità`;
+            
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = podcast.immagine || '';
+            modalImage.alt = podcast.titolo;
+            
+            // Gestione errore immagine nel modal
+            modalImage.onerror = function() {
+                this.style.display = 'none';
+                const fallback = document.createElement('div');
+                fallback.style.width = '140px';
+                fallback.style.height = '140px';
+                fallback.style.borderRadius = '28px';
+                fallback.style.background = 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))';
+                fallback.style.display = 'flex';
+                fallback.style.alignItems = 'center';
+                fallback.style.justifyContent = 'center';
+                fallback.style.color = 'white';
+                fallback.style.fontSize = '3rem';
+                fallback.style.margin = '0 auto 24px';
+                fallback.innerHTML = '<i class="fas fa-podcast"></i>';
+                
+                const modalHeader = document.querySelector('.modal-header');
+                modalHeader.insertBefore(fallback, modalImage);
+            };
+            
+            document.getElementById('modalDescription').textContent = 
+                podcast.descrizione && podcast.descrizione.endsWith('.txt') 
+                    ? `Descrizione disponibile nel file: ${podcast.descrizione}`
+                    : (podcast.descrizione || 'Nessuna descrizione disponibile');
+            
+            // Popola i tag
+            const modalTags = document.getElementById('modalTags');
+            modalTags.innerHTML = '';
+            
+            if (podcast.tag_comuni && podcast.tag_comuni.length > 0) {
+                podcast.tag_comuni.forEach(tag => {
+                    const tagSpan = document.createElement('span');
+                    tagSpan.className = 'tag-mini';
+                    tagSpan.textContent = tag;
+                    modalTags.appendChild(tagSpan);
+                });
+            } else {
+                const noTagsSpan = document.createElement('span');
+                noTagsSpan.className = 'tag-mini';
+                noTagsSpan.textContent = 'Nessun tag in comune';
+                noTagsSpan.style.opacity = '0.7';
+                modalTags.appendChild(noTagsSpan);
+            }
+            
+            // Mostra il modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        /**
+         * Chiude il modal
+         */
+        function closeModal() {
+            if (!modal) return;
+            
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            // Rimuovi eventuale fallback dell'immagine
+            const fallback = document.querySelector('.modal-header div[style*="linear-gradient"]');
+            if (fallback) {
+                fallback.remove();
+            }
+            
+            // Ripristina l'immagine
+            const modalImage = document.getElementById('modalImage');
+            modalImage.style.display = 'block';
+        }
+
+        /**
+         * Log delle statistiche per debug
+         */
+        function logStatistics() {
+            console.log('=== STATISTICHE SISTEMA ===');
+            console.log('Pagina inizializzata correttamente');
+            console.log('Struttura JSON: ranking array con podcast');
+            console.log('Ogni podcast contiene: titolo, descrizione, punteggio, tag_comuni, link, immagine');
+            console.log('===========================');
+        }
+
+        // Chiamata iniziale per log statistiche
+        setTimeout(logStatistics, 1000);
+    </script>
 </body>
+
 </html>

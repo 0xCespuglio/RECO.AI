@@ -4,11 +4,11 @@ import java.util.Set;
 
 public class Raccomander {
     
-    /**
-     * Calcola il coefficiente di Jaccard tra due insiemi di tag
-     * Formula: J(A,B) = |A ∩ B| / |A ∪ B| * 100
-     */
-    public static double calcolaJaccard(String[] preferenze, String[] tagsPodcast) {
+    /*
+        Calcola il coefficiente di Jaccard tra due insiemi di tag
+        Formula: J(A,B) = |A ∩ B| / |A ∪ B| * 100
+    */
+    private static double calcolaJaccard(String[] preferenze, String[] tagsPodcast) {
         Set<String> setPreferenze = new HashSet<>();
         Set<String> setTags = new HashSet<>();
         
@@ -42,10 +42,10 @@ public class Raccomander {
         return ((double) intersezione.size() / unione.size()) * 100.0;
     }
     
-    /**
-     * Trova i tag in comune tra preferenze e podcast
-     */
-    public static String[] trovaTagComuni(String[] preferenze, String[] tagsPodcast) {
+    
+    //Trova i tag in comune tra preferenze e podcast
+    
+    private static String[] trovaTagComuni(String[] preferenze, String[] tagsPodcast) {
         Set<String> setPreferenze = new HashSet<>();
         Set<String> tagComuni = new HashSet<>();
         
@@ -67,10 +67,7 @@ public class Raccomander {
         return tagComuni.toArray(String[]::new);
     }
     
-    /**
-     * Crea il ranking completo di tutti i podcast
-
-     */
+    //Crea il ranking completo di tutti i podcast
     public static ArrayList<Ranking> creaRanking(ArrayList<Podcast> listaPodcast, String[] preferenze) {
         ArrayList<Ranking> ranking = new ArrayList<>();
         

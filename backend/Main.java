@@ -1,5 +1,4 @@
 // LINGUA NOTE = ITALIANO
-// lettura del file ..\data\catalogo_podcast.csv
 
 import java.util.ArrayList;
 

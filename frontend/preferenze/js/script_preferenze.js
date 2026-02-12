@@ -1,15 +1,17 @@
-// RECO.AI - Podcast Edition - Gruppo Javascript
-// Script per la selezione delle preferenze utente e generazione user_preferences.json
+/**
+ * RECO.AI - Podcast Edition
+ * Script per la selezione delle preferenze utente e generazione user_preferences.json
+ */
 
 document.addEventListener('DOMContentLoaded', function() {
     try {
-        // Selezione elementi DOM con validazione
+        // === SELEZIONE ELEMENTI DOM ===
         const tags = document.querySelectorAll('.tag');
         const submitBtn = document.getElementById('submitBtn');
         const resetBtn = document.getElementById('resetBtn');
-        const feedbackSection = document.getElementById('feedback');
-        const feedbackList = document.getElementById('feedbackList');
-        const feedbackCount = document.getElementById('feedbackCount');
+        const algorithmSteps = document.getElementById('algorithmSteps');
+        const stepsList = document.getElementById('stepsList');
+        const progressFill = document.getElementById('progressFill');
 
         // Validazione elementi critici
         if (!submitBtn || !resetBtn) {
@@ -21,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Inizializzazione interfaccia
+        // === INIZIALIZZAZIONE ===
         initializeTags();
 
         /**
@@ -33,15 +35,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Evita duplicati se lo script viene ricaricato
                     if (tag.querySelector('input[type="checkbox"]')) return;
 
-                    // Crea e configura checkbox
+                    // Crea checkbox nascosta
                     const checkbox = createCheckbox();
                     tag.insertBefore(checkbox, tag.firstChild);
                     
                     // Gestori eventi
                     tag.addEventListener('click', (e) => handleTagClick(e, tag, checkbox));
-                    tag.addEventListener('keypress', (e) => handleTagKeypress(e, checkbox));
+                    tag.addEventListener('keypress', (e) => handleTagKeypress(e, tag, checkbox));
                     
-                    // Aggiungi attributo aria per accessibilità
+                    // Accessibilità
                     tag.setAttribute('aria-checked', 'false');
                     tag.setAttribute('tabindex', '0');
                     tag.setAttribute('role', 'checkbox');
@@ -57,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         function createCheckbox() {
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
-            checkbox.style.cssText = 'margin-right: 8px; width: 18px; height: 18px; cursor: pointer;';
+            checkbox.style.cssText = 'display: none;';
             checkbox.setAttribute('aria-hidden', 'true');
             return checkbox;
         }
@@ -72,7 +74,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 checkbox.checked = !checkbox.checked;
                 updateTagVisualState(tag, checkbox.checked);
-                updateFeedback();
             } catch (err) {
                 console.error('Errore gestione click:', err);
             }
@@ -81,15 +82,14 @@ document.addEventListener('DOMContentLoaded', function() {
         /**
          * Gestisce la pressione di Enter/Space sul tag (accessibilità)
          */
-        function handleTagKeypress(event, checkbox) {
+        function handleTagKeypress(event, tag, checkbox) {
             try {
                 if (!event || !checkbox) return;
                 
                 if (event.key === 'Enter' || event.key === ' ') {
                     event.preventDefault();
                     checkbox.checked = !checkbox.checked;
-                    updateTagVisualState(event.currentTarget, checkbox.checked);
-                    updateFeedback();
+                    updateTagVisualState(tag, checkbox.checked);
                 }
             } catch (err) {
                 console.error('Errore gestione tastiera:', err);
@@ -104,59 +104,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
             try {
                 if (isChecked) {
-                    tag.style.backgroundColor = '#e3f2fd';
-                    tag.style.border = '2px solid #2196F3';
-                    tag.style.fontWeight = 'bold';
+                    tag.classList.add('selected');
                     tag.setAttribute('aria-checked', 'true');
                 } else {
-                    tag.style.backgroundColor = '';
-                    tag.style.border = '';
-                    tag.style.fontWeight = '';
+                    tag.classList.remove('selected');
                     tag.setAttribute('aria-checked', 'false');
                 }
             } catch (err) {
                 console.error('Errore aggiornamento stato visivo:', err);
             }
-        }
-
-        /**
-         * Aggiorna il feedback visivo delle selezioni
-         */
-        function updateFeedback() {
-            try {
-                const selected = getSelectedPreferences();
-                
-                if (!feedbackSection) return;
-
-                if (selected.length === 0) {
-                    feedbackSection.style.display = 'none';
-                    return;
-                }
-
-                // Mostra feedback
-                feedbackSection.style.display = 'block';
-                
-                if (feedbackList) {
-                    feedbackList.innerHTML = selected
-                        .map(pref => `<li>${escapeHTML(pref)}</li>`)
-                        .join('');
-                }
-                
-                if (feedbackCount) {
-                    feedbackCount.textContent = selected.length;
-                }
-            } catch (err) {
-                console.error('Errore aggiornamento feedback:', err);
-            }
-        }
-
-        /**
-         * Escape HTML per prevenire XSS
-         */
-        function escapeHTML(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
         }
 
         /**
@@ -170,14 +126,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     const checkbox = tag.querySelector('input[type="checkbox"]');
                     if (!checkbox || !checkbox.checked) return;
 
-                    // Estrae il testo pulito (senza checkbox)
-                    const clone = tag.cloneNode(true);
-                    const cloneCheckbox = clone.querySelector('input');
-                    if (cloneCheckbox) {
-                        clone.removeChild(cloneCheckbox);
-                    }
+                    // Estrae il testo pulito dal data-value o dallo span
+                    const dataValue = tag.getAttribute('data-value');
+                    const spanText = tag.querySelector('span')?.textContent.trim();
+                    const text = spanText || dataValue || '';
                     
-                    const text = clone.textContent.trim();
                     if (text) {
                         selected.push(text);
                     }
@@ -187,6 +140,39 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             return selected;
+        }
+
+        /**
+         * Valida le selezioni prima del salvataggio
+         */
+        function validateSelections(preferences) {
+            if (!Array.isArray(preferences)) {
+                showErrorMessage('Errore interno: formato preferenze non valido.');
+                return false;
+            }
+
+            const count = preferences.length;
+            const required = 3;
+
+            if (count !== required) {
+                let message = '⚠️ Selezione non valida\n\n';
+                
+                if (count === 0) {
+                    message += 'Non hai selezionato nessuna preferenza.\n';
+                } else if (count < required) {
+                    message += `Hai selezionato solo ${count} preferenza${count === 1 ? '' : 'e'}.\n`;
+                } else {
+                    message += `Hai selezionato ${count} preferenze.\n`;
+                }
+                
+                message += `\nDevi selezionare esattamente ${required} preferenze per continuare.\n`;
+                message += '\n✓ Le tue selezioni attuali sono state mantenute.';
+                
+                alert(message);
+                return false;
+            }
+            
+            return true;
         }
 
         /**
@@ -290,62 +276,80 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         /**
-         * Valida le selezioni prima del salvataggio
+         * Avvia l'animazione di elaborazione
          */
-        function validateSelections(preferences) {
-            if (!Array.isArray(preferences)) {
-                showErrorMessage('Errore interno: formato preferenze non valido.');
-                return false;
-            }
-
-            const count = preferences.length;
-            const required = 3;
-
-            if (count !== required) {
-                let message = '⚠️ Selezione non valida\n\n';
-                
-                if (count === 0) {
-                    message += 'Non hai selezionato nessuna preferenza.\n';
-                } else if (count < required) {
-                    message += `Hai selezionato solo ${count} preferenza${count === 1 ? '' : 'e'}.\n`;
-                } else {
-                    message += `Hai selezionato ${count} preferenze.\n`;
-                }
-                
-                message += `\nDevi selezionare esattamente ${required} preferenze per continuare.\n`;
-                message += '\n✓ Le tue selezioni attuali sono state mantenute.';
-                
-                alert(message);
-                return false;
-            }
+        function startProcessingAnimation() {
+            if (!algorithmSteps || !stepsList || !progressFill) return;
             
-            return true;
+            algorithmSteps.classList.add('visible');
+            stepsList.innerHTML = '';
+            progressFill.style.width = '0%';
+
+            // Steps animati
+            const steps = [
+                { icon: '🔍', text: 'Analisi delle tue preferenze...', delay: 600 },
+                { icon: '📊', text: 'Calcolo coefficiente di Jaccard...', delay: 1300 },
+                { icon: '🤖', text: 'Applicazione algoritmo di matching...', delay: 2000 },
+                { icon: '🎯', text: 'Identificazione podcast più rilevanti...', delay: 2700 },
+                { icon: '✨', text: 'Generazione consigli personalizzati...', delay: 3400 }
+            ];
+
+            steps.forEach((step, i) => {
+                setTimeout(() => {
+                    const div = document.createElement('div');
+                    div.className = 'step-item';
+                    div.innerHTML = `<span class="step-icon">${step.icon}</span> ${step.text}`;
+                    stepsList.appendChild(div);
+
+                    // Completa lo step precedente
+                    if (i > 0) {
+                        stepsList.children[i - 1].classList.add('completed');
+                    }
+
+                    // Aggiorna progress bar
+                    progressFill.style.width = `${((i + 1) / steps.length * 100)}%`;
+
+                    // Ultimo step: reindirizza
+                    if (i === steps.length - 1) {
+                        setTimeout(() => {
+                            div.classList.add('completed');
+                            setTimeout(() => {
+                                window.location.href = '../risultato/risultato.html';
+                            }, 800);
+                        }, 500);
+                    }
+                }, step.delay);
+            });
         }
 
         // === GESTORI PULSANTI ===
 
-        // Pulsante Conferma
+        /**
+         * Pulsante Conferma
+         */
         submitBtn.addEventListener('click', async function() {
             try {
                 const preferences = getSelectedPreferences();
                 
-                // Validazione
+                // Validazione (richiede esattamente 3 selezioni)
                 if (!validateSelections(preferences)) return;
 
-                // Creazione oggetto JSON
-                const data = { tags: preferences };
+                console.log('Generazione user_preferences.json:', { tags: preferences });
                 
-                console.log('Generazione user_preferences.json:', data);
-                
-                // Salvataggio file
+                // Salvataggio file JSON
                 await savePreferencesJSON(preferences);
+                
+                // Avvia animazione elaborazione
+                startProcessingAnimation();
             } catch (err) {
                 console.error('Errore durante il salvataggio:', err);
                 showErrorMessage('Si è verificato un errore. Riprova.');
             }
         });
 
-        // Pulsante Reset
+        /**
+         * Pulsante Reset
+         */
         resetBtn.addEventListener('click', function() {
             try {
                 const confirmReset = confirm('Vuoi davvero azzerare tutte le selezioni?');
@@ -359,12 +363,16 @@ document.addEventListener('DOMContentLoaded', function() {
                             checkbox.checked = false;
                             updateTagVisualState(tag, false);
                         }
+                        // Animazione shake
+                        tag.style.animation = 'shake 0.5s ease';
+                        setTimeout(() => {
+                            tag.style.animation = '';
+                        }, 500);
                     } catch (err) {
                         console.error('Errore reset tag:', err);
                     }
                 });
                 
-                updateFeedback();
                 console.log('Selezioni azzerate');
             } catch (err) {
                 console.error('Errore durante il reset:', err);
@@ -372,10 +380,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Log iniziale
-        console.log('✓ RECO.AI - Script caricato e pronto');
+        // === LOG INIZIALE ===
+        console.log('✓ RECO.AI - Script preferenze caricato');
         console.log(`  - ${tags.length} tag disponibili`);
-        console.log('  - Formato output: { "tags": ["tag1", "tag2", ...] }');
+        console.log('  - Formato output: { "tags": ["tag1", "tag2", "tag3"] }');
 
     } catch (err) {
         console.error('Errore critico durante l\'inizializzazione:', err);

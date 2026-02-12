@@ -1,10 +1,18 @@
+/* ============================================
+   RECO.AI - Podcast Recommendation System
+   CSS Condiviso tra tutte le pagine
+   ============================================ */
+
+/* === RESET E BASE === */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* === VARIABILI CSS === */
 :root {
+    /* Colori */
     --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
     --bg-card: #ffffff;
     --text-primary: #1e293b;
@@ -15,17 +23,24 @@
     --accent-tertiary: #10b981;
     --border-light: #f1f5f9;
     --border-medium: #e2e8f0;
+    
+    /* Ombre */
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
     --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.08);
     --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.12);
+    
+    /* Border Radius */
     --radius-sm: 12px;
     --radius-md: 16px;
     --radius-lg: 24px;
     --radius-xl: 32px;
+    
+    /* Transizioni */
     --transition-fast: 0.2s ease;
     --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+/* === BODY E LAYOUT === */
 body {
     font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--bg-gradient);
@@ -50,7 +65,7 @@ body::before {
     z-index: -1;
 }
 
-/* Container elegante */
+/* === CONTAINER === */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -58,7 +73,7 @@ body::before {
     position: relative;
 }
 
-/* Header e titoli */
+/* === HEADER === */
 .header {
     text-align: center;
     margin-bottom: 60px;
@@ -96,7 +111,7 @@ h1 {
     margin: 0 auto;
 }
 
-/* Categoria e grid */
+/* === CATEGORY CARD === */
 .category {
     background: var(--bg-card);
     border-radius: var(--radius-xl);
@@ -126,7 +141,7 @@ h1 {
     font-size: 1.2rem;
 }
 
-/* Grid dei tag migliorata */
+/* === TAGS GRID === */
 .tags-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -146,6 +161,10 @@ h1 {
     position: relative;
     overflow: hidden;
     user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
 }
 
 .tag::before {
@@ -193,7 +212,7 @@ h1 {
     font-size: 0.9rem;
 }
 
-/* Bottoni */
+/* === BUTTONS === */
 .actions {
     display: flex;
     gap: 20px;
@@ -244,7 +263,23 @@ button {
     transform: translateY(-2px);
 }
 
-/* Progress bar e steps */
+.btn-back {
+    background: white;
+    border: 2px solid var(--border-medium);
+    color: var(--text-primary);
+    padding: 16px 32px;
+    margin: 40px auto 0;
+    display: flex;
+    gap: 8px;
+}
+
+.btn-back:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    transform: translateX(-5px);
+}
+
+/* === PROGRESS BAR E ALGORITHM STEPS === */
 .algorithm-steps {
     background: var(--bg-card);
     padding: 40px;
@@ -255,11 +290,13 @@ button {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease, transform 0.6s ease;
+    display: none;
 }
 
 .algorithm-steps.visible {
     opacity: 1;
     transform: translateY(0);
+    display: block;
 }
 
 .steps-title {
@@ -286,33 +323,11 @@ button {
     opacity: 0;
 }
 
-.step-item:nth-child(1) {
-    animation-delay: 0.1s;
-}
-
-.step-item:nth-child(2) {
-    animation-delay: 0.3s;
-}
-
-.step-item:nth-child(3) {
-    animation-delay: 0.5s;
-}
-
-.step-item:nth-child(4) {
-    animation-delay: 0.7s;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+.step-item:nth-child(1) { animation-delay: 0.1s; }
+.step-item:nth-child(2) { animation-delay: 0.3s; }
+.step-item:nth-child(3) { animation-delay: 0.5s; }
+.step-item:nth-child(4) { animation-delay: 0.7s; }
+.step-item:nth-child(5) { animation-delay: 0.9s; }
 
 .step-item.completed {
     border-left-color: var(--accent-tertiary);
@@ -347,7 +362,7 @@ button {
     transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Risultati */
+/* === RESULTS CONTAINER === */
 .results-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -355,6 +370,7 @@ button {
     margin: 60px 0;
 }
 
+/* === PODCAST CARD === */
 .podcast-card {
     background: var(--bg-card);
     border-radius: var(--radius-xl);
@@ -379,7 +395,7 @@ button {
 }
 
 .podcast-card:hover {
-    transform: translateY(-12px);
+    transform: translateY(-8px);
     box-shadow: var(--shadow-lg);
 }
 
@@ -387,39 +403,11 @@ button {
     opacity: 1;
 }
 
-.score-badge {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: linear-gradient(135deg, var(--accent-tertiary), #34d399);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 800;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-    z-index: 2;
-}
-
-.img-stondata-card {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0 auto 24px;
-    border: 6px solid white;
-    box-shadow: var(--shadow-md);
-    transition: transform var(--transition-smooth);
-}
-
-.podcast-card:hover .img-stondata-card {
-    transform: scale(1.08);
-}
-
 .podcast-card h3 {
     font-size: 1.4rem;
-    margin-bottom: 12px;
     color: var(--text-primary);
+    margin-bottom: 12px;
+    font-weight: 700;
 }
 
 .podcast-card p {
@@ -434,23 +422,15 @@ button {
     opacity: 1;
 }
 
-.btn-back {
-    background: white;
-    border: 2px solid var(--border-medium);
-    color: var(--text-primary);
-    padding: 16px 32px;
-    margin: 40px auto 0;
-    display: flex;
-    gap: 8px;
+.podcast-card img {
+    transition: all 0.3s ease;
 }
 
-.btn-back:hover {
-    border-color: var(--accent-primary);
-    color: var(--accent-primary);
-    transform: translateX(-5px);
+.podcast-card:hover img {
+    transform: scale(1.08) rotate(2deg);
 }
 
-/* Modal ultra-curato */
+/* === MODAL === */
 .modal {
     position: fixed;
     inset: 0;
@@ -464,16 +444,6 @@ button {
 .modal.active {
     display: flex;
     animation: modalFadeIn 0.3s ease;
-}
-
-@keyframes modalFadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
 }
 
 .modal-overlay {
@@ -493,18 +463,6 @@ button {
     z-index: 10000;
     box-shadow: var(--shadow-lg);
     animation: modalSlideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-@keyframes modalSlideUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px) scale(0.95);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
 }
 
 .modal-close {
@@ -621,7 +579,99 @@ button {
     box-shadow: var(--shadow-sm);
 }
 
-/* Responsive */
+/* === ANIMAZIONI === */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Applicazione animazione float ai podcast */
+.podcast-card:nth-child(1) { animation: float 6s ease-in-out infinite; }
+.podcast-card:nth-child(2) { animation: float 6s ease-in-out infinite 0.2s; }
+.podcast-card:nth-child(3) { animation: float 6s ease-in-out infinite 0.4s; }
+
+/* === SCROLLBAR PERSONALIZZATA === */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
+}
+
+/* === IMMAGINI === */
+img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.img-stondata-card,
+.modal-image {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    position: relative;
+}
+
+/* === RESPONSIVE === */
+@media (min-width: 768px) {
+    .tags-grid {
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .tags-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 30px 20px;
@@ -656,65 +706,6 @@ button {
     }
 }
 
-/* Animazioni aggiuntive */
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-.podcast-card:nth-child(1) {
-    animation: float 6s ease-in-out infinite;
-}
-
-.podcast-card:nth-child(2) {
-    animation: float 6s ease-in-out infinite 0.2s;
-}
-
-.podcast-card:nth-child(3) {
-    animation: float 6s ease-in-out infinite 0.4s;
-}
-
-/* Scrollbar personalizzata */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f5f9;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
-}
-
-/* Aggiungi al file style.css esistente */
-
-/* Ottimizzazione griglia per più tag */
-@media (min-width: 768px) {
-    .tags-grid {
-        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    }
-}
-
-@media (min-width: 1024px) {
-    .tags-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    }
-}
-
-/* Ottimizzazione per mobile */
 @media (max-width: 767px) {
     .tags-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -759,44 +750,4 @@ button {
         flex: 0 0 auto;
         width: 140px;
     }
-}
-
-/* Aggiungi alla fine del tuo style.css */
-
-/* Stile per immagini mancanti */
-.img-stondata-card,
-.modal-image {
-    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    position: relative;
-}
-
-.img-stondata-card::after,
-.modal-image::after {
-    content: attr(alt);
-    position: absolute;
-    bottom: -25px;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-}
-
-.podcast-card img {
-    transition: all 0.3s ease;
-}
-
-.podcast-card:hover img {
-    transform: scale(1.08) rotate(2deg);
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    object-fit: cover;
 }

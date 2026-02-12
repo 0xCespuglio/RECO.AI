@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECO.AI - Scopri i podcast perfetti per te</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Animazione fade-in specifica per la home */
+        .home-container {
+            animation: fadeIn 1s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .home-title {
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 24px;
+            letter-spacing: -0.03em;
+        }
+
+        .home-description {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 50px;
+            line-height: 1.8;
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            color: white;
+            padding: 20px 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: var(--radius-md);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 12px 35px rgba(139, 92, 246, 0.3);
+            transition: all var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-start:active {
+            transform: translateY(-3px);
+        }
+
+        /* Decorazioni */
+        .home-decoration {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.15;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .decoration-1 {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .decoration-2 {
+            top: 20%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .decoration-3 {
+            bottom: 15%;
+            left: 15%;
+            animation-delay: 2s;
+        }
+
+        .decoration-4 {
+            bottom: 20%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorazioni di sfondo -->
+    <div class="home-decoration decoration-1">🎧</div>
+    <div class="home-decoration decoration-2">🎙️</div>
+    <div class="home-decoration decoration-3">📻</div>
+    <div class="home-decoration decoration-4">🎵</div>
+
+    <div class="container home-container">
+        <h1 class="home-title">RECO.AI</h1>
+        <p class="home-description">
+            Il sistema intelligente che trova i podcast perfetti per te.<br>
+            Seleziona le tue preferenze e lascia che l'algoritmo ti consigli i contenuti più adatti ai tuoi interessi.
+        </p>
+        <button class="btn-start" onclick="window.location.href='preferenze/preferenze.html'">
+            <i class="fas fa-play-circle"></i>
+            Inizia
+        </button>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

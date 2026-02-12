@@ -1,90 +1,58 @@
 {
   "ranking": [
     {
-      "titolo": "Passa dal BSMT",
-      "descrizione": "desc/Passa-dal-BSMT.txt",
+      "titolo": "Tavolo Parcheggio",
+      "descrizione": "desc/Tavolo-Parcheggio.txt",
       "punteggio": 50.0,
-      "tag_comuni": ["cultura","interviste"],
+      "tag_comuni": ["commedia","società"],
       "link": "https://open.spotify.com",
-      "immagine": "Passa-dal-BSMT.jpg"
+      "immagine": "Tavolo-Parcheggio.jpg"
     },
     {
-      "titolo": "Il podcast di Alessandro Barbero: Lezioni e Conferenze di Storia",
-      "descrizione": "desc/Barbero.txt",
+      "titolo": "Non hanno un amico",
+      "descrizione": "desc/Non-hanno-un-amico.txt",
       "punteggio": 20.0,
-      "tag_comuni": ["cultura"],
+      "tag_comuni": ["commedia"],
       "link": "https://open.spotify.com",
-      "immagine": "Barbero.jpg"
+      "immagine": "Non-hanno-un-amico.jpg"
     },
     {
       "titolo": "Tintoria",
       "descrizione": "desc/Tintoria.txt",
       "punteggio": 20.0,
-      "tag_comuni": ["interviste"],
+      "tag_comuni": ["commedia"],
       "link": "https://open.spotify.com",
       "immagine": "Tintoria.jpg"
-    },
-    {
-      "titolo": "One More Time",
-      "descrizione": "desc/One-More-Time.txt",
-      "punteggio": 20.0,
-      "tag_comuni": ["interviste"],
-      "link": "https://open.spotify.com",
-      "immagine": "One-More-Time.jpg"
     },
     {
       "titolo": "Supernova",
       "descrizione": "desc/Supernova.txt",
       "punteggio": 20.0,
-      "tag_comuni": ["cultura"],
+      "tag_comuni": ["musica"],
       "link": "https://open.spotify.com",
       "immagine": "Supernova.jpg"
     },
     {
-      "titolo": "Pulp Podcast",
-      "descrizione": "desc/Pulp-Podcast.txt",
+      "titolo": "Non aprite quella podcast",
+      "descrizione": "desc/Non-aprite-quella-podcast.txt",
       "punteggio": 20.0,
-      "tag_comuni": ["interviste"],
+      "tag_comuni": ["commedia"],
       "link": "https://open.spotify.com",
-      "immagine": "Pulp-Podcast.jpg"
-    },
-    {
-      "titolo": "Geopop",
-      "descrizione": "desc/Geopop.txt",
-      "punteggio": 20.0,
-      "tag_comuni": ["cultura"],
-      "link": "https://open.spotify.com",
-      "immagine": "Geopop.jpg"
+      "immagine": "Non-aprite-quella-podcast.jpg"
     },
     {
       "titolo": "PodCast di Giacomo Poretti",
       "descrizione": "desc/Podcast-Giacomo-Poretti.txt",
       "punteggio": 20.0,
-      "tag_comuni": ["interviste"],
+      "tag_comuni": ["società"],
       "link": "https://open.spotify.com",
       "immagine": "Podcast-Giacomo-Poretti.jpg"
-    },
-    {
-      "titolo": "Squali",
-      "descrizione": "desc/Squali.txt",
-      "punteggio": 20.0,
-      "tag_comuni": ["cultura"],
-      "link": "https://open.spotify.com",
-      "immagine": "Squali.jpg"
-    },
-    {
-      "titolo": "Din Don Down",
-      "descrizione": "desc/Din-Don-Down.txt",
-      "punteggio": 20.0,
-      "tag_comuni": ["interviste"],
-      "link": "https://open.spotify.com",
-      "immagine": "Din-Don-Down.jpg "
     },
     {
       "titolo": "Capiamo",
       "descrizione": "desc/Capiamo.txt",
       "punteggio": 20.0,
-      "tag_comuni": ["cultura"],
+      "tag_comuni": ["società"],
       "link": "https://open.spotify.com",
       "immagine": "Capiamo.jpg"
     },
@@ -92,9 +60,41 @@
       "titolo": "Streetsmart",
       "descrizione": "desc/Streetsmart.txt",
       "punteggio": 20.0,
-      "tag_comuni": ["cultura pop"],
+      "tag_comuni": ["commedia"],
       "link": "https://open.spotify.com",
       "immagine": "Streetsmart.jpg"
+    },
+    {
+      "titolo": "Un avvertimento prima di iniziare",
+      "descrizione": "desc/Un-avvertimento-prima-di-iniziare.txt",
+      "punteggio": 20.0,
+      "tag_comuni": ["società"],
+      "link": "https://open.spotify.com",
+      "immagine": "Un-avvertimento-prima-di-iniziare.jpg"
+    },
+    {
+      "titolo": "Lo Zoo di 105",
+      "descrizione": "desc/Lo-Zoo-di-105.txt",
+      "punteggio": 20.0,
+      "tag_comuni": ["commedia"],
+      "link": "https://open.spotify.com",
+      "immagine": "Lo-Zoo-di-105.jpg"
+    },
+    {
+      "titolo": "Power Pizza",
+      "descrizione": "desc/Power-Pizza.txt",
+      "punteggio": 20.0,
+      "tag_comuni": ["musica"],
+      "link": "https://open.spotify.com",
+      "immagine": "Power-Pizza.jpg"
+    },
+    {
+      "titolo": "Gurulandia",
+      "descrizione": "desc/Gurulandia.txt",
+      "punteggio": 20.0,
+      "tag_comuni": ["commedia"],
+      "link": "https://open.spotify.com",
+      "immagine": "Gurulandia.jpg"
     }
   ]
 }

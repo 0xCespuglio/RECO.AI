@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PodcastMatch • I tuoi consigli personalizzati</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style_risultato.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>I tuoi podcast consigliati</h1>
+            <p class="subtitle">Basati sulle tue preferenze e ordinati per affinità</p>
+        </header>
+
+        <!-- Elementi di caricamento e errore -->
+        <div id="loading" style="text-align: center; padding: 40px;">
+            <div style="margin-bottom: 20px; font-size: 3rem; color: var(--accent-primary);">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+            <h2 style="color: var(--text-primary); margin-bottom: 10px;">Caricamento dei podcast...</h2>
+            <p style="color: var(--text-secondary);">Stiamo analizzando le tue preferenze per trovare i podcast perfetti per te.</p>
+        </div>
+
+        <div id="error" style="display: none; text-align: center; padding: 40px; background: #fef2f2; border-radius: var(--radius-md); border: 2px solid #fecaca;">
+            <div style="margin-bottom: 20px; font-size: 3rem; color: #dc2626;">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h2 style="color: #991b1b; margin-bottom: 10px;">Si è verificato un errore</h2>
+            <p id="error-message" style="color: #7f1d1d; max-width: 600px; margin: 0 auto 20px;"></p>
+            <button onclick="location.reload()" style="background: var(--accent-primary); color: white; border: none; padding: 12px 24px; border-radius: var(--radius-md); cursor: pointer; font-weight: 600;">
+                <i class="fas fa-redo"></i> Riprova
+            </button>
+        </div>
+
+        <!-- Container risultati -->
+        <div class="results-container" id="podcasts-container">
+            <!-- I podcast verranno inseriti qui dinamicamente -->
+        </div>
+
+        <!-- Bottone torna indietro -->
+        <button class="btn-back" onclick="window.location.href='../preferenze/preferenze.html'">
+            <i class="fas fa-arrow-left"></i>
+            Torna alla selezione
+        </button>
+    </div>
+
+    <!-- Modal dettagli podcast -->
+    <div class="modal" id="modal">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <img id="modalImage" class="modal-image" src="" alt="">
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <div class="modal-compatibility" id="modalCompatibility"></div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3><i class="fas fa-info-circle"></i> Di cosa tratta</h3>
+                    <p id="modalDescription"></p>
+                </div>
+                <div class="modal-section">
+                    <h3><i class="fas fa-tags"></i> Tematiche</h3>
+                    <div class="modal-tags" id="modalTags"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script_risultato.js"></script>
+</body>
+</html>

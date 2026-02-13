@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECO-AI — I tuoi podcast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../risultato/CSS/style.css"
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+
+<header>
+    <a href="../index.html"><img src="../assets/img/logo.png" alt="RECO-AI" class="logo-img"></a>
+    <div class="step-indicator">
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+        <span>Passo 2 di 2</span>
+    </div>
+</header>
+
+<main>
+    <!-- Loading state -->
+    <div class="loader-wrapper" id="loader">
+        <div class="loader-ring"></div>
+        <p class="loader-text">L'AI sta analizzando le tue preferenze…</p>
+    </div>
+
+    <!-- Results -->
+    <div class="results-wrapper" id="results">
+        <div class="page-header">
+            <span class="page-label">I tuoi risultati</span>
+            <h1>Ecco i podcast<br>perfetti per te</h1>
+            <p class="page-sub" id="sub-text">Selezionati in base ai tuoi interessi.</p>
+        </div>
+
+        <div class="tag-bar" id="tagBar"></div>
+
+        <div class="podcast-grid" id="podcastGrid"></div>
+
+        <div class="bottom-cta">
+            <a href="../preferenze/preferenze.html" class="btn-outline">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Cambia preferenze
+            </a>
+        </div>
+    </div>
+</main>
+
+<script>
+    const podcastDB = {
+        tecnologia: [
+            { name: "Tech For Humans", desc: "Innovazione e futuro digitale spiegati in modo semplice.", episodes: 142, rating: "4.8" },
+            { name: "AI Unpacked", desc: "Intelligenza artificiale, machine learning e oltre.", episodes: 87, rating: "4.9" },
+        ],
+        sport: [
+            { name: "Campo Aperto", desc: "Analisi tattiche e storie dal mondo dello sport.", episodes: 210, rating: "4.7" },
+            { name: "The Athlete Mindset", desc: "La psicologia dei campioni raccontata dai protagonisti.", episodes: 64, rating: "4.6" },
+        ],
+        musica: [
+            { name: "Note Libere", desc: "Dalla classica all'indie: la musica raccontata con passione.", episodes: 118, rating: "4.8" },
+            { name: "Backstage Stories", desc: "I segreti dietro i grandi album della storia.", episodes: 45, rating: "4.9" },
+        ],
+        cinema: [
+            { name: "Ciak, si gira!", desc: "Recensioni, interviste e curiosità dal grande schermo.", episodes: 193, rating: "4.7" },
+            { name: "Frame Perfetto", desc: "Analisi dei capolavori del cinema mondiale.", episodes: 76, rating: "4.8" },
+        ],
+        scienza: [
+            { name: "Wired Brain", desc: "Le ultime scoperte scientifiche in 20 minuti.", episodes: 230, rating: "4.9" },
+            { name: "Universo Espanso", desc: "Astrofisica e cosmologia per curiosi.", episodes: 58, rating: "4.8" },
+        ],
+        business: [
+            { name: "Founders Talk", desc: "Storie di imprenditori italiani di successo.", episodes: 165, rating: "4.7" },
+            { name: "Market Pulse", desc: "Finanza e mercati spiegati ogni settimana.", episodes: 312, rating: "4.6" },
+        ],
+        storia: [
+            { name: "Passato Prossimo", desc: "La storia più affascinante raccontata come un thriller.", episodes: 94, rating: "4.9" },
+            { name: "Geopolitica", desc: "Come il passato plasma il mondo di oggi.", episodes: 67, rating: "4.8" },
+        ],
+        benessere: [
+            { name: "Mente Serena", desc: "Meditazione, mindfulness e salute mentale.", episodes: 128, rating: "4.7" },
+            { name: "Corpo in Forma", desc: "Nutrizione, allenamento e stile di vita sano.", episodes: 89, rating: "4.6" },
+        ],
+    };
+
+    const emojis = {
+        tecnologia: "💻", sport: "⚽", musica: "🎵", cinema: "🎬",
+        scienza: "🔬", business: "📈", storia: "🏛️", benessere: "🧘"
+    };
+
+    const colors = {
+        tecnologia: "#3b82f6", sport: "#22c55e", musica: "#ec4899",
+        cinema: "#f59e0b", scienza: "#06b6d4", business: "#8b5cf6",
+        storia: "#ef4444", benessere: "#10b981"
+    };
+
+    function buildResults(preferences) {
+        const tagBar = document.getElementById('tagBar');
+        const grid = document.getElementById('podcastGrid');
+        const subText = document.getElementById('sub-text');
+
+        // Tags
+        preferences.forEach(pref => {
+            const tag = document.createElement('div');
+            tag.className = 'tag';
+            tag.textContent = `${emojis[pref] || ''} ${pref}`;
+            tagBar.appendChild(tag);
+        });
+
+        const count = preferences.length;
+        subText.textContent = `${count} argomento${count > 1 ? 'i' : ''} selezionato${count > 1 ? 'i' : ''} — ${count * 2} podcast consigliati per te.`;
+
+        // Cards
+        preferences.forEach((pref, pi) => {
+            const podcasts = podcastDB[pref] || [];
+            podcasts.forEach((pod, i) => {
+                const card = document.createElement('div');
+                card.className = 'podcast-card';
+                card.style.animationDelay = (0.3 + (pi * 2 + i) * 0.08) + 's';
+
+                const color = colors[pref] || '#7c5cfc';
+                const emoji = emojis[pref] || '🎙️';
+
+                card.innerHTML = `
+                    <div class="podcast-cover" style="background: ${color}22;">
+                        ${emoji}
+                    </div>
+                    <div class="podcast-meta">
+                        <span class="podcast-category">${pref}</span>
+                        <span class="podcast-dot"></span>
+                        <span class="podcast-episodes">${pod.episodes} ep.</span>
+                    </div>
+                    <div class="podcast-name">${pod.name}</div>
+                    <div class="podcast-desc">${pod.desc}</div>
+                    <div class="podcast-footer">
+                        <div class="podcast-rating">
+                            ★ ${pod.rating}
+                        </div>
+                        <div class="play-btn">
+                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        });
+    }
+
+    // Simulate loading then show results
+    setTimeout(() => {
+        const saved = sessionStorage.getItem('recoai_preferences');
+        const preferences = saved ? JSON.parse(saved) : ['tecnologia', 'musica'];
+
+        buildResults(preferences);
+
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('results').classList.add('visible');
+    }, 1800);
+</script>
+
+</body>
+</html>

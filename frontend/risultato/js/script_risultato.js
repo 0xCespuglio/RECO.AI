@@ -3,6 +3,7 @@
  * Script principale per caricamento e visualizzazione dei podcast
  */
 
+// === CONFIGURATION ===
 // === ELEMENTI DOM PRINCIPALI ===
 let podcastsContainer = null;
 let loadingElement = null;
@@ -10,12 +11,14 @@ let errorElement = null;
 let errorMessageElement = null;
 let modal = null;
 
+// === IMMAGINE FALLBACK ===
+const FALLBACK_IMAGE = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23e5e7eb" width="200" height="200"/%3E%3Ctext x="50%" y="50%" font-size="14" fill="%239ca3af" text-anchor="middle" dominant-baseline="middle"%3EImmagine non disponibile%3C/text%3E%3C/svg%3E';
+
+// === INITIALIZATION ===
 /**
  * Funzione principale eseguita al caricamento della pagina
  */
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Inizializzazione RECO.AI...');
-    
     // Inizializza gli elementi DOM
     initDOMElements();
     
@@ -38,13 +41,12 @@ function initDOMElements() {
     }
 }
 
+// === DATA LOADING ===
 /**
  * Carica i dati dei podcast dal file JSON
  */
 async function loadPodcasts() {
     try {
-        console.log('Caricamento dati da output_ranking.json...');
-        
         // Effettua la richiesta al file JSON
         const response = await fetch('../../data/output_ranking.json');
         
@@ -60,8 +62,6 @@ async function loadPodcasts() {
         if (!data.ranking || !Array.isArray(data.ranking)) {
             throw new Error('Formato JSON non valido: proprietà "ranking" mancante o non array');
         }
-        
-        console.log(`Dati caricati: ${data.ranking.length} podcast trovati`);
         
         // Nascondi il messaggio di caricamento
         hideLoading();
@@ -97,6 +97,7 @@ function showError(message) {
     }
 }
 
+// === RENDERING ===
 /**
  * Visualizza i podcast nella pagina
  * @param {Array} podcasts - Array di podcast da visualizzare
@@ -122,7 +123,6 @@ function displayPodcasts(podcasts) {
         podcastsContainer.appendChild(podcastElement);
     });
     
-    console.log(`Visualizzati ${podcasts.length} podcast`);
 }
 
 /**
@@ -144,7 +144,7 @@ function createPodcastElement(podcast, position) {
     // Badge punteggio
     const scoreBadge = document.createElement('div');
     scoreBadge.classList.add('podcast-card-score-badge');
-    scoreBadge.style.background = getScoreGradient(podcast.punteggio);
+    scoreBadge.classList.add(getScoreClass(podcast.punteggio));
     scoreBadge.textContent = `${podcast.punteggio}% affinità`;
     
     // Container immagine
@@ -152,19 +152,14 @@ function createPodcastElement(podcast, position) {
     imageContainer.classList.add('podcast-image-container');
     
     const img = document.createElement('img');
-    img.src = podcast.immagine || '';
+    img.src = podcast.immagine ? `../assets/img/${podcast.immagine}` : '';
     img.alt = `Copertina di ${podcast.titolo}`;
     img.classList.add('podcast-card-image');
     
     // Gestione errore immagine
     img.onerror = function() {
-        console.warn(`Immagine non trovata: ${podcast.immagine}`);
-        this.style.display = 'none';
-        
-        const fallback = document.createElement('div');
-        fallback.classList.add('podcast-image-fallback');
-        fallback.innerHTML = '<i class="fas fa-podcast"></i>';
-        imageContainer.appendChild(fallback);
+        this.src = FALLBACK_IMAGE;
+        this.style.opacity = '0.8';
     };
     
     imageContainer.appendChild(img);
@@ -197,8 +192,9 @@ function createPodcastElement(podcast, position) {
     const description = document.createElement('p');
     description.classList.add('podcast-description');
     if (podcast.descrizione && podcast.descrizione.endsWith('.txt')) {
-        description.textContent = `Descrizione disponibile nel file: ${podcast.descrizione}`;
+        description.textContent = `Caricamento descrizione...`;
         description.classList.add('podcast-description-file');
+        loadDescription(`../assets/desc/${podcast.descrizione}`, description);
     } else if (podcast.descrizione) {
         description.textContent = podcast.descrizione;
     }
@@ -240,18 +236,20 @@ function createPodcastElement(podcast, position) {
     return podcastDiv;
 }
 
+// === UTILITY FUNCTIONS ===
 /**
- * Restituisce il gradiente di colore in base al punteggio di affinità
+ * Restituisce la classe CSS per il badge di punteggio di affinità
  * @param {number} score - Punteggio da 0 a 100
- * @returns {string} Gradiente CSS
+ * @returns {string} Nome della classe CSS
  */
-function getScoreGradient(score) {
-    if (score >= 80) return 'linear-gradient(135deg, #10b981, #34d399)'; // Verde
-    if (score >= 60) return 'linear-gradient(135deg, #f59e0b, #fbbf24)'; // Arancione
-    if (score >= 40) return 'linear-gradient(135deg, #f97316, #fb923c)'; // Arancione scuro
-    return 'linear-gradient(135deg, #ef4444, #f87171)'; // Rosso
+function getScoreClass(score) {
+    if (score >= 80) return 'score-badge-high';
+    if (score >= 60) return 'score-badge-medium-high';
+    if (score >= 40) return 'score-badge-medium';
+    return 'score-badge-low';
 }
 
+// === MODAL HANDLING ===
 /**
  * Apre il modal con i dettagli del podcast
  * @param {Object} podcast - Dati del podcast
@@ -264,25 +262,25 @@ function openModal(podcast) {
     document.getElementById('modalCompatibility').textContent = `${podcast.punteggio}% affinità`;
     
     const modalImage = document.getElementById('modalImage');
-    modalImage.src = podcast.immagine || '';
+    modalImage.src = podcast.immagine ? `../assets/img/${podcast.immagine}` : '';
     modalImage.alt = podcast.titolo;
     modalImage.style.display = 'block';
     
     // Gestione errore immagine nel modal
     modalImage.onerror = function() {
-        this.style.display = 'none';
-        const fallback = document.createElement('div');
-        fallback.classList.add('modal-image-fallback');
-        fallback.innerHTML = '<i class="fas fa-podcast"></i>';
-        
-        const modalHeader = document.querySelector('.modal-header');
-        modalHeader.insertBefore(fallback, modalImage);
+        this.src = FALLBACK_IMAGE;
+        this.style.opacity = '0.8';
     };
     
     document.getElementById('modalDescription').textContent = 
         podcast.descrizione && podcast.descrizione.endsWith('.txt') 
-            ? `Descrizione disponibile nel file: ${podcast.descrizione}`
+            ? `Caricamento descrizione...`
             : (podcast.descrizione || 'Nessuna descrizione disponibile');
+    
+    // Carica la descrizione dal file se necessario
+    if (podcast.descrizione && podcast.descrizione.endsWith('.txt')) {
+        loadDescription(`../assets/desc/${podcast.descrizione}`, document.getElementById('modalDescription'));
+    }
     
     // Popola i tag
     const modalTags = document.getElementById('modalTags');
@@ -316,30 +314,24 @@ function closeModal() {
     
     modal.classList.remove('active');
     document.body.style.overflow = 'auto';
-    
-    // Rimuovi eventuale fallback dell'immagine
-    const fallback = document.querySelector('.modal-header div[style*="linear-gradient"]');
-    if (fallback) {
-        fallback.remove();
-    }
-    
-    // Ripristina l'immagine
-    const modalImage = document.getElementById('modalImage');
-    if (modalImage) {
-        modalImage.style.display = 'block';
-    }
 }
 
 /**
- * Log delle statistiche per debug
+ * Carica il contenuto di una descrizione da un file .txt
+ * @param {string} filePath - Percorso del file di descrizione
+ * @param {HTMLElement} element - Elemento DOM dove inserire la descrizione
  */
-function logStatistics() {
-    console.log('=== STATISTICHE SISTEMA ===');
-    console.log('Pagina inizializzata correttamente');
-    console.log('Struttura JSON: ranking array con podcast');
-    console.log('Ogni podcast contiene: titolo, descrizione, punteggio, tag_comuni, link, immagine');
-    console.log('===========================');
+async function loadDescription(filePath, element) {
+    try {
+        const response = await fetch(filePath);
+        if (!response.ok) {
+            element.textContent = 'Descrizione non disponibile';
+            return;
+        }
+        const text = await response.text();
+        element.textContent = text.trim();
+    } catch (error) {
+        console.error(`Errore nel caricamento della descrizione: ${error}`);
+        element.textContent = 'Errore nel caricamento della descrizione';
+    }
 }
-
-// Chiamata iniziale per log statistiche
-setTimeout(logStatistics, 1000);

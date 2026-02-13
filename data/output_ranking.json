@@ -1,100 +1,60 @@
 {
   "ranking": [
     {
-      "titolo": "Tavolo Parcheggio",
-      "descrizione": "desc/Tavolo-Parcheggio.txt",
-      "punteggio": 50.0,
-      "tag_comuni": ["commedia","società"],
+      "titolo": "Indagini",
+      "descrizione": "indagini.txt",
+      "punteggio": 20.0,
+      "tag_comuni": ["crime"],
       "link": "https://open.spotify.com",
-      "immagine": "Tavolo-Parcheggio.jpg"
+      "immagine": "indagini.webp"
     },
     {
-      "titolo": "Non hanno un amico",
-      "descrizione": "desc/Non-hanno-un-amico.txt",
+      "titolo": "Elisa True Crime",
+      "descrizione": "elisa-true-crime.txt",
       "punteggio": 20.0,
-      "tag_comuni": ["commedia"],
+      "tag_comuni": ["crime"],
       "link": "https://open.spotify.com",
-      "immagine": "Non-hanno-un-amico.jpg"
+      "immagine": "elisa-true-crime.webp"
     },
     {
-      "titolo": "Tintoria",
-      "descrizione": "desc/Tintoria.txt",
+      "titolo": "Il podcast di Alessandro Barbero: Lezioni e Conferenze di Storia",
+      "descrizione": "barbero.txt",
       "punteggio": 20.0,
-      "tag_comuni": ["commedia"],
+      "tag_comuni": ["storia"],
       "link": "https://open.spotify.com",
-      "immagine": "Tintoria.jpg"
-    },
-    {
-      "titolo": "Supernova",
-      "descrizione": "desc/Supernova.txt",
-      "punteggio": 20.0,
-      "tag_comuni": ["musica"],
-      "link": "https://open.spotify.com",
-      "immagine": "Supernova.jpg"
+      "immagine": "barbero.webp"
     },
     {
       "titolo": "Non aprite quella podcast",
-      "descrizione": "desc/Non-aprite-quella-podcast.txt",
+      "descrizione": "non-aprite-quella-podcast.txt",
       "punteggio": 20.0,
-      "tag_comuni": ["commedia"],
+      "tag_comuni": ["crime"],
       "link": "https://open.spotify.com",
-      "immagine": "Non-aprite-quella-podcast.jpg"
+      "immagine": "non-aprite-quella-podcast.webp"
     },
     {
       "titolo": "PodCast di Giacomo Poretti",
-      "descrizione": "desc/Podcast-Giacomo-Poretti.txt",
+      "descrizione": "podcast-giacomo-poretti.txt",
       "punteggio": 20.0,
-      "tag_comuni": ["società"],
+      "tag_comuni": ["umorismo"],
       "link": "https://open.spotify.com",
-      "immagine": "Podcast-Giacomo-Poretti.jpg"
+      "immagine": "podcast-giacomo-poretti.webp"
     },
     {
-      "titolo": "Capiamo",
-      "descrizione": "desc/Capiamo.txt",
+      "titolo": "Din Don Down",
+      "descrizione": "din-don-down.txt",
       "punteggio": 20.0,
-      "tag_comuni": ["società"],
+      "tag_comuni": ["umorismo"],
       "link": "https://open.spotify.com",
-      "immagine": "Capiamo.jpg"
-    },
-    {
-      "titolo": "Streetsmart",
-      "descrizione": "desc/Streetsmart.txt",
-      "punteggio": 20.0,
-      "tag_comuni": ["commedia"],
-      "link": "https://open.spotify.com",
-      "immagine": "Streetsmart.jpg"
+      "immagine": "din-don-down.webp "
     },
     {
       "titolo": "Un avvertimento prima di iniziare",
-      "descrizione": "desc/Un-avvertimento-prima-di-iniziare.txt",
+      "descrizione": "un-avvertimento-prima-di-iniziare.txt",
       "punteggio": 20.0,
-      "tag_comuni": ["società"],
+      "tag_comuni": ["crime"],
       "link": "https://open.spotify.com",
-      "immagine": "Un-avvertimento-prima-di-iniziare.jpg"
-    },
-    {
-      "titolo": "Lo Zoo di 105",
-      "descrizione": "desc/Lo-Zoo-di-105.txt",
-      "punteggio": 20.0,
-      "tag_comuni": ["commedia"],
-      "link": "https://open.spotify.com",
-      "immagine": "Lo-Zoo-di-105.jpg"
-    },
-    {
-      "titolo": "Power Pizza",
-      "descrizione": "desc/Power-Pizza.txt",
-      "punteggio": 20.0,
-      "tag_comuni": ["musica"],
-      "link": "https://open.spotify.com",
-      "immagine": "Power-Pizza.jpg"
-    },
-    {
-      "titolo": "Gurulandia",
-      "descrizione": "desc/Gurulandia.txt",
-      "punteggio": 20.0,
-      "tag_comuni": ["commedia"],
-      "link": "https://open.spotify.com",
-      "immagine": "Gurulandia.jpg"
+      "immagine": "un-avvertimento-prima-di-iniziare.webp"
     }
   ]
 }

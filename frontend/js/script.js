@@ -1,8 +1,11 @@
-/**
- * RECO.AI - Home Page Script
- * La home page non richiede logica JavaScript complessa
- * Tutte le animazioni sono gestite tramite CSS
- */
+document.addEventListener('DOMContentLoaded', () => {
+	const startBtn = document.querySelector('.btn-start');
+	if (startBtn) {
+		startBtn.addEventListener('click', (e) => {
+			e.preventDefault();
+			window.location.href = 'preferenze/preferenze.html';
+		});
+	}
 
-// Log inizializzazione (opzionale)
-console.log('RECO.AI - Home page caricata');
+	console.log('RECO.AI - Home page caricata');
+});

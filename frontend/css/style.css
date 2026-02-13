@@ -529,6 +529,24 @@ button {
     padding: 40px;
 }
 
+/* Small tweaks for the download confirmation modal inside preferenze */
+#downloadConfirmModal .modal-content {
+    max-width: 480px;
+    padding: 0;
+}
+
+#downloadConfirmModal .modal-header {
+    padding: 28px 28px 16px;
+}
+
+#downloadConfirmModal .modal-body {
+    padding: 20px 28px 32px;
+}
+
+#downloadConfirmModal .btn-container button {
+    min-width: 140px;
+}
+
 .modal-section {
     margin-bottom: 32px;
 }

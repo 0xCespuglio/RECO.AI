@@ -138,59 +138,23 @@ function createPodcastElement(podcast, position) {
     
     // Badge posizione
     const positionBadge = document.createElement('div');
-    positionBadge.style.cssText = `
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-        color: white;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 800;
-        font-size: 1.1rem;
-        box-shadow: var(--shadow-md);
-    `;
+    positionBadge.classList.add('podcast-card-position-badge');
     positionBadge.textContent = position;
     
     // Badge punteggio
     const scoreBadge = document.createElement('div');
-    scoreBadge.style.cssText = `
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        background: ${getScoreGradient(podcast.punteggio)};
-        color: white;
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-weight: 700;
-        font-size: 0.95rem;
-        box-shadow: var(--shadow-sm);
-    `;
+    scoreBadge.classList.add('podcast-card-score-badge');
+    scoreBadge.style.background = getScoreGradient(podcast.punteggio);
     scoreBadge.textContent = `${podcast.punteggio}% affinità`;
     
     // Container immagine
     const imageContainer = document.createElement('div');
-    imageContainer.style.cssText = `
-        margin: 50px 0 20px;
-        text-align: center;
-    `;
+    imageContainer.classList.add('podcast-image-container');
     
     const img = document.createElement('img');
     img.src = podcast.immagine || '';
     img.alt = `Copertina di ${podcast.titolo}`;
-    img.className = 'img-stondata-card';
-    img.style.cssText = `
-        width: 200px;
-        height: 200px;
-        border-radius: 24px;
-        object-fit: cover;
-        box-shadow: var(--shadow-md);
-        border: 4px solid white;
-    `;
+    img.classList.add('podcast-card-image');
     
     // Gestione errore immagine
     img.onerror = function() {
@@ -198,19 +162,7 @@ function createPodcastElement(podcast, position) {
         this.style.display = 'none';
         
         const fallback = document.createElement('div');
-        fallback.style.cssText = `
-            width: 200px;
-            height: 200px;
-            border-radius: 24px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
-            margin: 0 auto;
-            box-shadow: var(--shadow-md);
-        `;
+        fallback.classList.add('podcast-image-fallback');
         fallback.innerHTML = '<i class="fas fa-podcast"></i>';
         imageContainer.appendChild(fallback);
     };
@@ -219,23 +171,12 @@ function createPodcastElement(podcast, position) {
     
     // Titolo
     const title = document.createElement('h3');
+    title.classList.add('podcast-card-title');
     title.textContent = podcast.titolo;
-    title.style.cssText = `
-        font-size: 1.6rem;
-        color: var(--text-primary);
-        margin: 20px 0 16px;
-        font-weight: 700;
-    `;
     
     // Tag in comune
     const tagsDiv = document.createElement('div');
-    tagsDiv.style.cssText = `
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin: 16px 0;
-        justify-content: center;
-    `;
+    tagsDiv.classList.add('podcast-tags-container');
     
     if (podcast.tag_comuni && podcast.tag_comuni.length > 0) {
         podcast.tag_comuni.forEach(tag => {
@@ -254,50 +195,24 @@ function createPodcastElement(podcast, position) {
     
     // Descrizione
     const description = document.createElement('p');
+    description.classList.add('podcast-description');
     if (podcast.descrizione && podcast.descrizione.endsWith('.txt')) {
         description.textContent = `Descrizione disponibile nel file: ${podcast.descrizione}`;
-        description.style.fontStyle = 'italic';
-        description.style.color = 'var(--text-secondary)';
+        description.classList.add('podcast-description-file');
     } else if (podcast.descrizione) {
         description.textContent = podcast.descrizione;
-        description.style.color = 'var(--text-secondary)';
     }
     
     // Link al podcast
     const linkContainer = document.createElement('div');
-    linkContainer.style.cssText = `
-        margin-top: 20px;
-        text-align: center;
-    `;
+    linkContainer.classList.add('podcast-link-container');
     
     const link = document.createElement('a');
     link.href = podcast.link;
     link.target = '_blank';
-    link.style.cssText = `
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        background-color: #1DB954;
-        color: white;
-        padding: 12px 24px;
-        text-decoration: none;
-        border-radius: var(--radius-md);
-        font-weight: 600;
-        transition: all var(--transition-fast);
-    `;
+    link.classList.add('podcast-link');
     
     link.innerHTML = '<i class="fab fa-spotify"></i> Ascolta su Spotify';
-    
-    link.onmouseover = function() {
-        this.style.transform = 'translateY(-2px)';
-        this.style.boxShadow = 'var(--shadow-md)';
-    };
-    
-    link.onmouseout = function() {
-        this.style.transform = 'translateY(0)';
-        this.style.boxShadow = 'none';
-    };
     
     linkContainer.appendChild(link);
     
@@ -357,18 +272,7 @@ function openModal(podcast) {
     modalImage.onerror = function() {
         this.style.display = 'none';
         const fallback = document.createElement('div');
-        fallback.style.cssText = `
-            width: 140px;
-            height: 140px;
-            border-radius: 28px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-            margin: 0 auto 24px;
-        `;
+        fallback.classList.add('modal-image-fallback');
         fallback.innerHTML = '<i class="fas fa-podcast"></i>';
         
         const modalHeader = document.querySelector('.modal-header');

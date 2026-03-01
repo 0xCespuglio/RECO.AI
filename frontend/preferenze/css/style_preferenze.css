@@ -1,0 +1,278 @@
+/* ============================================
+   RECO.AI — Stili esclusivi pagina Preferenze
+   Richiede: ../css/style.css (già linkato)
+   Contiene: orb preferenze, layout main,
+   page-header, tag-grid (card style),
+   action-bar, bottoni
+   ============================================ */
+
+/* === ORB SPECIFICI PREFERENZE === */
+.orb-1 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(252, 92, 92, 0.15) 0%, transparent 70%);
+    top: -100px; right: -100px;
+}
+
+.orb-2 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(213, 0, 0, 0.10) 0%, transparent 70%);
+    bottom: -100px; left: -100px;
+}
+
+/* === MAIN LAYOUT === */
+main {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    padding: 110px 24px 80px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* === PAGE HEADER === */
+.page-header {
+    text-align: center;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.1s;
+}
+
+.page-label {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    letter-spacing: 0em;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+
+.page-sub {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* === TAGS GRID (rebranded da .tags-grid, usato con id="tematicheGrid") ===
+   Il JS usa: #tematicheGrid, .tag, .tag.selected, data-value
+   CSS mappa .tag al visual stile di "card" del nuovo design */
+.tags-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+    gap: 12px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.25s;
+}
+
+/* === SINGOLO TAG (vecchio selettore, nuovo stile card) === */
+.tag {
+    position: relative;
+    padding: 24px 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: border-color 0.25s ease, transform 0.2s ease, background 0.25s ease;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    /* reset del ::before dal vecchio stile globale */
+}
+
+.tag::before {
+    display: none;
+}
+
+.tag i {
+    font-size: 1.6rem;
+    color: var(--muted);
+    transition: transform 0.2s ease, color 0.2s ease;
+    margin-bottom: 2px;
+}
+
+.tag span {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.3;
+}
+
+.tag:hover {
+    border-color: rgba(134, 0, 0, 0.35);
+    background: var(--surface2);
+    transform: translateY(-3px);
+}
+
+.tag:hover i {
+    transform: scale(1.15);
+    color: var(--accent);
+}
+
+.tag.selected {
+    border-color: var(--accent);
+    background: rgba(134, 0, 0, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 1px var(--accent);
+}
+
+.tag.selected i {
+    color: var(--accent);
+}
+
+.tag.selected span {
+    color: var(--accent);
+}
+
+/* Checkmark selezione */
+.tag.selected::after {
+    content: '✓';
+    position: absolute;
+    top: 8px; right: 10px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+/* === CATEGORY WRAPPER (mantiene la struttura del vecchio .category) === */
+.category {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.category:hover {
+    box-shadow: none;
+    transform: none;
+}
+
+.category-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.6s ease forwards 0.35s;
+}
+
+.category-title::before {
+    content: none;
+}
+
+/* === ACTION BAR (bottoni submit/reset) === */
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.6s;
+}
+
+/* Bottone principale (submit) */
+.btn-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s;
+    box-shadow: 0 0 40px rgba(213, 0, 0, 0.25);
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 50px rgba(213, 0, 0, 0.4);
+}
+
+.btn-submit:disabled,
+.btn-submit.disabled {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+/* Bottone secondario (reset) */
+.btn-reset {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 24px;
+    background: transparent;
+    color: var(--muted);
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 0.9rem;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-reset:hover {
+    border-color: rgba(134, 0, 0, 0.35);
+    color: var(--text);
+}
+
+/* === NOTA INFORMATIVA === */
+.info-note {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards 0.5s;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    main { padding: 100px 20px 60px; }
+    .tags-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+}
+
+@media (max-width: 600px) {
+    .tags-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .actions { flex-direction: column-reverse; gap: 12px; }
+    .btn-submit, .btn-reset { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 480px) {
+    .tag { padding: 20px 12px 16px; }
+    .tag i { font-size: 1.3rem; }
+    .tag span { font-size: 0.82rem; }
+}

@@ -4,28 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RECO.AI - Scopri i podcast perfetti per te</title>
+
+    <!-- Google Fonts: nuovo design system -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Stili -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style_index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Decorazioni di sfondo -->
-    <div class="home-decoration decoration-1">🎧</div>
-    <div class="home-decoration decoration-2">🎙️</div>
-    <div class="home-decoration decoration-3">📻</div>
-    <div class="home-decoration decoration-4">🎵</div>
 
-    <div class="container home-container">
-        <h1 class="home-title">RECO.AI</h1>
-        <p class="home-description">
-            Il sistema intelligente che trova i podcast perfetti per te.<br>
-            Seleziona le tue preferenze e lascia che l'algoritmo ti consigli i contenuti più adatti ai tuoi interessi.
+    <!-- Decorazioni orb di sfondo -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- Header fisso -->
+    <header>
+        <a href="index.html">
+            <img src="assets/img/logo.png" alt="RECO.AI" class="logo-img"
+                 onerror="this.outerHTML='<span class=\'logo-text\'>RECO.AI</span>'">
+        </a>
+        <span class="header-badge">HOME</span>
+        
+    </header>
+
+    <!-- Hero -->
+    <main>
+
+        <h1>
+            I podcast<br>
+            <span>perfetti per te</span>
+        </h1>
+
+        <p class="hero-sub">
+            Seleziona le tue passioni e lascia che l'algoritmo trovi i contenuti
+            più adatti ai tuoi interessi.
         </p>
-        <button class="btn-start">
-            <i class="fas fa-play-circle"></i>
-            Inizia          
-        </button>
-    </div>
+
+        <div class="cta-group">
+            <!-- Classe btn-start mantenuta per compatibilità JS, btn-primary per lo stile -->
+            <button class="btn-primary btn-start" id="btnStart">
+                Inizia
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Decorazione waveform -->
+        <!--
+        <div class="waveform">
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+        </div>
+            -->
+    </main>
 
     <script src="js/script.js"></script>
 </body>

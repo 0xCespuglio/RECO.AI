@@ -1,97 +1,200 @@
-/* Animazione fade-in specifica per la home */
-        .home-container {
-            animation: fadeIn 1s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 80vh;
-            text-align: center;
-        }
+/* ============================================
+   RECO.AI — Stili esclusivi pagina Index
+   Richiede: css/style.css 
+   Contiene: orb home, hero, h1, hero-sub,
+   cta-group, btn-primary, waveform
+   ============================================ */
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+/* === ORB SPECIFICI HOME === */
+.orb-1 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(252, 92, 92, 0.18) 0%, transparent 70%);
+    top: -200px; left: -200px;
+}
 
-        .home-title {
-            font-size: clamp(3rem, 6vw, 4.5rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 24px;
-            letter-spacing: -0.03em;
-        }
+.orb-2 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(213, 0, 0, 0.12) 0%, transparent 70%);
+    bottom: -100px; right: -100px;
+}
 
-        .home-description {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto 50px;
-            line-height: 1.8;
-        }
+/* === HERO LAYOUT === */
+main {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 24px 80px;
+    text-align: center;
+}
 
-        .btn-start {
-            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-            color: white;
-            padding: 20px 50px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            border-radius: var(--radius-md);
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 12px 35px rgba(139, 92, 246, 0.3);
-            transition: all var(--transition-smooth);
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-        }
+/* === HERO LABEL === */
+.hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.1s;
+}
 
-        .btn-start:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 50px rgba(139, 92, 246, 0.4);
-        }
+.hero-label::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--muted);
+}
 
-        .btn-start:active {
-            transform: translateY(-3px);
-        }
+/* === TITOLO PRINCIPALE === */
+h1 {
+    font-family: 'POPPINS', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    line-height: 1.1;
+    letter-spacing: 0.03em;
+    color: var(--text);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.2s;
+}
 
-        /* Decorazioni */
-        .home-decoration {
-            position: absolute;
-            font-size: 3rem;
-            opacity: 0.15;
-            animation: float 8s ease-in-out infinite;
-        }
+h1 span {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
 
-        .decoration-1 {
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
-        }
+/* === HERO SUBTITLE === */
+.hero-sub {
 
-        .decoration-2 {
-            top: 20%;
-            right: 15%;
-            animation-delay: 1s;
-        }
+   
+    
+    font-family: 'POPPINS', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: var(--muted);
+    font-weight: 400;
+    max-width: 480px;
+    line-height: 1.75;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.35s;
+}
 
-        .decoration-3 {
-            bottom: 15%;
-            left: 15%;
-            animation-delay: 2s;
-        }
+/* === CTA GROUP === */
+.cta-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.5s;
+}
 
-        .decoration-4 {
-            bottom: 20%;
-            right: 10%;
-            animation-delay: 3s;
-        }
+/* === BOTTONE PRIMARIO HOME === */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+    text-decoration: none;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 0 40px rgba(213, 0, 0, 0.28);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 50px rgba(213, 0, 0, 0.45);
+}
+
+.btn-primary svg {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.btn-primary:hover svg {
+    transform: translateX(3px);
+}
+
+/* Alias per compatibilità con script.js (usato se JS referenzia .btn-start) */
+.btn-start {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 0 40px rgba(213, 0, 0, 0.28);
+}
+
+.btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 50px rgba(213, 0, 0, 0.45);
+}
+
+/* === WAVEFORM DECORATION === */
+.waveform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 80px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.8s;
+}
+
+.wave-bar {
+    width: 3px;
+    background: linear-gradient(to top, var(--accent), var(--accent2));
+    border-radius: 10px;
+    animation: wave 1.4s ease-in-out infinite;
+}
+
+.wave-bar:nth-child(1)  { height: 12px; animation-delay: 0.0s; }
+.wave-bar:nth-child(2)  { height: 24px; animation-delay: 0.1s; }
+.wave-bar:nth-child(3)  { height: 36px; animation-delay: 0.2s; }
+.wave-bar:nth-child(4)  { height: 20px; animation-delay: 0.3s; }
+.wave-bar:nth-child(5)  { height: 30px; animation-delay: 0.4s; }
+.wave-bar:nth-child(6)  { height: 16px; animation-delay: 0.5s; }
+.wave-bar:nth-child(7)  { height: 28px; animation-delay: 0.6s; }
+.wave-bar:nth-child(8)  { height: 20px; animation-delay: 0.5s; }
+.wave-bar:nth-child(9)  { height: 32px; animation-delay: 0.4s; }
+.wave-bar:nth-child(10) { height: 18px; animation-delay: 0.3s; }
+.wave-bar:nth-child(11) { height: 26px; animation-delay: 0.2s; }
+.wave-bar:nth-child(12) { height: 14px; animation-delay: 0.1s; }
+
+@keyframes wave {
+    0%, 100% { transform: scaleY(1); opacity: 0.6; }
+    50%       { transform: scaleY(0.4); opacity: 0.3; }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 600px) {
+    main { padding: 100px 20px 60px; }
+    .waveform { margin-top: 50px; }
+    .cta-group { flex-direction: column; align-items: center; }
+}

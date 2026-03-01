@@ -1,101 +1,351 @@
-/**
- * RECO.AI - Stili specifici per la pagina Risultato
- * Gli stili comuni sono in /css/style.css
- * Questo file contiene solo override o stili specifici per questa pagina
- */
+/* ============================================
+   RECO.AI — Stili esclusivi pagina Risultato
+   Richiede: ../css/style.css (già linkato)
+   Contiene: orb risultato, layout main,
+   loader, results wrapper, tag-bar,
+   podcast-grid, podcast-card, footer CTA,
+   score badges (mantenuti per JS dinamico)
+   ============================================ */
 
-/* === CARD PODCAST === */
+/* === ORB SPECIFICO RISULTATO === */
+.orb-1 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(252, 92, 92, 0.15) 0%, transparent 70%);
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+}
+
+/* === MAIN LAYOUT === */
+main {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    padding: 110px 24px 80px;
+    max-width: 940px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   STATO DI CARICAMENTO
+   JS usa: id="loading" per show/hide
+   ============================================ */
+#loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 24px;
+    text-align: center;
+    padding: 40px;
+}
+
+/* Spinner ring (sostituisce l'icona FA precedente) */
+.loader-ring {
+    width: 52px; height: 52px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.85s linear infinite;
+}
+
+/* Alias per compatibilità: il vecchio HTML usava fa-spinner */
+#loading .fa-spinner {
+    display: none;
+}
+
+#loading h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--text);
+}
+
+#loading p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    max-width: 380px;
+    line-height: 1.6;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   STATO DI ERRORE
+   JS usa: id="error", id="error-message"
+   ============================================ */
+#error {
+    display: none;
+    text-align: center;
+    padding: 48px 32px;
+    background: var(--surface);
+    border-radius: 20px;
+    border: 1px solid rgba(134, 0, 0, 0.2);
+    margin: 40px 0;
+}
+
+#error h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+#error p,
+#error-message {
+    color: var(--muted);
+    font-size: 0.92rem;
+    max-width: 520px;
+    margin: 0 auto 24px;
+    line-height: 1.6;
+}
+
+#error button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#error button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(213, 0, 0, 0.35);
+}
+
+
+/* ============================================
+   CONTAINER RISULTATI
+   JS usa: id="podcasts-container" per inserire le card
+   Aggiunta classe podcast-grid per il layout
+   ============================================ */
+.results-container,
+#podcasts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 16px;
+    margin: 48px 0;
+}
+
+/* ============================================
+   PAGE HEADER (risultati)
+   ============================================ */
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.1s;
+}
+
+.page-label {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    letter-spacing: 0;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.subtitle,
+.page-sub {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 0;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+/* ============================================
+   TAG BAR (tematiche selezionate in cima)
+   ============================================ */
+.tag-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.25s;
+}
+
+.tag-bar .tag-item,
+.tag-bar .tag {
+    padding: 6px 16px;
+    background: rgba(134, 0, 0, 0.08);
+    border: 1px solid rgba(134, 0, 0, 0.2);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+/* ============================================
+   PODCAST CARD
+   JS usa: .podcast-card (classe aggiunta dinamicamente),
+   .podcast-card-position-badge, .podcast-card-score-badge,
+   .podcast-card-image, .podcast-card-title,
+   .podcast-tags-container, .podcast-description,
+   .podcast-link-container, .podcast-link
+   ============================================ */
+.podcast-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 24px;
+    transition: border-color 0.25s ease, transform 0.2s ease, background 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+}
+
+.podcast-card:hover {
+    border-color: rgba(134, 0, 0, 0.3);
+    background: var(--surface2);
+    transform: translateY(-3px);
+}
+
+.podcast-card:nth-child(1) { animation-delay: 0.30s; }
+.podcast-card:nth-child(2) { animation-delay: 0.38s; }
+.podcast-card:nth-child(3) { animation-delay: 0.46s; }
+.podcast-card:nth-child(4) { animation-delay: 0.54s; }
+.podcast-card:nth-child(5) { animation-delay: 0.62s; }
+.podcast-card:nth-child(6) { animation-delay: 0.70s; }
+.podcast-card:nth-child(7) { animation-delay: 0.78s; }
+.podcast-card:nth-child(8) { animation-delay: 0.86s; }
+
+/* --- Badge posizione (es. "1", "2", "3") --- */
 .podcast-card-position-badge {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    top: 16px; left: 16px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
     color: white;
-    width: 40px;
-    height: 40px;
+    width: 34px; height: 34px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Poppins', sans-serif;
     font-weight: 800;
-    font-size: 1.1rem;
-    box-shadow: var(--shadow-md);
-}
-
-.podcast-card-score-badge {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-weight: 700;
     font-size: 0.95rem;
     box-shadow: var(--shadow-sm);
 }
 
-/* === SCORE BADGE COLORS === */
-.score-badge-high {
-    background: linear-gradient(135deg, #10b981, #34d399); /* Verde */
+/* --- Badge score (compatibilità e score) --- */
+.podcast-card-score-badge {
+    position: absolute;
+    top: 16px; right: 16px;
+    color: white;
+    padding: 5px 14px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 0.82rem;
+    box-shadow: var(--shadow-sm);
 }
 
-.score-badge-medium-high {
-    background: linear-gradient(135deg, #f59e0b, #fbbf24); /* Arancione */
-}
+/* Colori score badge (mantenuti per retrocompatibilità JS) */
+.score-badge-high        { background: linear-gradient(135deg, #10b981, #34d399); }
+.score-badge-medium-high { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+.score-badge-medium      { background: linear-gradient(135deg, #f97316, #fb923c); }
+.score-badge-low         { background: linear-gradient(135deg, #ef4444, #f87171); }
 
-.score-badge-medium {
-    background: linear-gradient(135deg, #f97316, #fb923c); /* Arancione scuro */
-}
-
-.score-badge-low {
-    background: linear-gradient(135deg, #ef4444, #f87171); /* Rosso */
-}
-
+/* --- Immagine podcast --- */
 .podcast-image-container {
-    margin: 50px 0 20px;
+    margin: 44px 0 16px;
     text-align: center;
 }
 
 .podcast-card-image {
-    width: 200px;
-    height: 200px;
-    border-radius: 24px;
+    width: 100px; height: 100px;
+    border-radius: 16px;
     object-fit: cover;
     box-shadow: var(--shadow-md);
-    border: 4px solid white;
+    border: 3px solid white;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
 }
 
-.podcast-card-title {
-    font-size: 1.6rem;
-    color: var(--text-primary);
-    margin: 20px 0 16px;
-    font-weight: 700;
+/* --- Titolo --- */
+.podcast-card-title,
+.podcast-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 14px 0 10px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
 }
 
+/* --- Tag tematiche --- */
 .podcast-tags-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin: 16px 0;
-    justify-content: center;
+    gap: 6px;
+    margin: 10px 0;
+    justify-content: flex-start;
 }
 
+/* Eredita .tag-mini dal style.css globale */
+.podcast-tags-container .tag-mini {
+    font-size: 0.75rem;
+    padding: 4px 12px;
+}
+
+/* --- Descrizione --- */
 .podcast-description {
-    color: var(--text-secondary);
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.6;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
-    text-overflow: ellipsis;
+    margin-top: 8px;
 }
 
 .podcast-description-file {
     font-style: italic;
-    color: var(--text-secondary);
+    color: var(--muted);
+    font-size: 0.82rem;
 }
 
+/* --- Link Spotify --- */
 .podcast-link-container {
-    margin-top: 20px;
+    margin-top: 18px;
     text-align: center;
 }
 
@@ -104,16 +354,230 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background-color: #1DB954;
+    background: #1DB954;
     color: white;
-    padding: 12px 24px;
+    padding: 10px 22px;
     text-decoration: none;
-    border-radius: var(--radius-md);
+    border-radius: 100px;
     font-weight: 600;
-    transition: all var(--transition-fast);
+    font-size: 0.88rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .podcast-link:hover {
     transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(29, 185, 84, 0.35);
+}
+
+/* ============================================
+   BOTTONE TORNA INDIETRO
+   JS usa: .btn-back (onclick nel markup)
+   ============================================ */
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 28px;
+    background: transparent;
+    color: var(--muted);
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 0.9rem;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    margin: 16px auto 0;
+}
+
+.btn-back:hover {
+    border-color: rgba(0, 0, 0, 0.35);
+    color: var(--text);
+    transform: translateX(-3px);
+}
+
+/* Footer CTA area */
+.bottom-cta {
+    text-align: center;
+    margin-top: 40px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.85s;
+}
+
+/* ============================================
+   HEADER STATICO (mantenuto per JS che potrebbe
+   usarlo come ancora di navigazione)
+   ============================================ */
+.header {
+    display: none; /* sostituito dal <header> fisso */
+}
+
+/* === MODAL (usato in risultato.html) === */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal.active {
+    display: flex;
+    animation: modalFadeIn 0.3s ease;
+}
+
+.modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.modal-content {
+    background: var(--surface);
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 24px;
+    z-index: 10000;
+    box-shadow: var(--shadow-lg);
+    animation: modalSlideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.modal-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 36px; height: 36px;
+    background: var(--surface2);
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    font-size: 1.3rem;
+    color: var(--muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 10;
+    padding: 0;
+}
+
+.modal-close:hover {
+    background: var(--accent);
+    color: white;
+    border-color: transparent;
+    transform: rotate(90deg);
+}
+
+.modal-header {
+    padding: 40px 40px 28px;
+    background: var(--surface2);
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid white;
     box-shadow: var(--shadow-md);
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.modal-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+}
+
+.modal-compatibility {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+    padding: 6px 18px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 0.82rem;
+}
+
+.modal-body {
+    padding: 32px 40px;
+}
+
+.modal-section {
+    margin-bottom: 28px;
+}
+
+.modal-section:last-child {
+    margin-bottom: 0;
+}
+
+.modal-section h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modal-section p {
+    color: var(--muted);
+    line-height: 1.75;
+    font-size: 0.92rem;
+}
+
+.modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.tag-mini {
+    background: var(--surface2);
+    border: 1px solid rgba(134, 0, 0, 0.2);
+    color: var(--accent);
+    padding: 5px 14px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.tag-mini:hover {
+    background: rgba(134, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    main { padding: 100px 20px 60px; }
+    .results-container,
+    #podcasts-container { grid-template-columns: 1fr; gap: 14px; }
+}
+
+@media (max-width: 600px) {
+    .tag-bar { gap: 6px; }
+    .podcast-card { padding: 24px 18px; }
 }

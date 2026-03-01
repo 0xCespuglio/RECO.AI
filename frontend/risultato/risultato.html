@@ -3,54 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PodcastMatch • I tuoi consigli personalizzati</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="css/style_risultato.css">
+    <title>RECO.AI • I tuoi podcast consigliati</title>
+
+    <!-- Google Fonts: nuovo design system -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+
+
+    <!-- Font Awesome (usato da script_risultato.js per le icone dinamiche) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Stili -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style_risultato.css">
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1>I tuoi podcast consigliati</h1>
-            <p class="subtitle">Basati sulle tue preferenze e ordinati per affinità</p>
-        </header>
 
-        <!-- Elementi di caricamento e errore -->
-        <div id="loading" style="text-align: center; padding: 40px;">
-            <div style="margin-bottom: 20px; font-size: 3rem; color: var(--accent-primary);">
-                <i class="fas fa-spinner fa-spin"></i>
-            </div>
-            <h2 style="color: var(--text-primary); margin-bottom: 10px;">Caricamento dei podcast...</h2>
-            <p style="color: var(--text-secondary);">Stiamo analizzando le tue preferenze per trovare i podcast perfetti per te.</p>
+    <!-- Decorazione orb di sfondo -->
+    <div class="orb orb-1"></div>
+
+    <!-- Header fisso -->
+    <header>
+        <a href="../index.html">
+            <img src="../assets/img/logo.png" alt="RECO.AI" class="logo-img"
+                 onerror="this.outerHTML='<span class=\'logo-text\'>RECO.AI</span>'">
+        </a>
+        <div class="step-indicator">
+            <div class="step-dot active"></div>
+            <div class="step-dot active"></div>
+            <span>Passo 2 di 2</span>
+        </div>
+    </header>
+
+    <main>
+        <!-- =============================================
+             STATO DI CARICAMENTO
+             JS usa: id="loading" per mostrare/nascondere
+             ============================================= -->
+        <div id="loading">
+            <!-- Spinner in stile nuovo (il CSS nasconde .fa-spinner) -->
+            <div class="loader-ring"></div>
+            <h2>Caricamento dei podcast...</h2>
+            <p>Stiamo analizzando le tue preferenze per trovare i podcast perfetti per te.</p>
         </div>
 
-        <div id="error" style="display: none; text-align: center; padding: 40px; background: #fef2f2; border-radius: var(--radius-md); border: 2px solid #fecaca;">
-            <div style="margin-bottom: 20px; font-size: 3rem; color: #dc2626;">
-                <i class="fas fa-exclamation-triangle"></i>
-            </div>
-            <h2 style="color: #991b1b; margin-bottom: 10px;">Si è verificato un errore</h2>
-            <p id="error-message" style="color: #7f1d1d; max-width: 600px; margin: 0 auto 20px;"></p>
-            <button onclick="location.reload()" style="background: var(--accent-primary); color: white; border: none; padding: 12px 24px; border-radius: var(--radius-md); cursor: pointer; font-weight: 600;">
+        <!-- =============================================
+             STATO DI ERRORE
+             JS usa: id="error", id="error-message"
+             ============================================= -->
+        <div id="error">
+            <div style="font-size: 2.5rem; margin-bottom: 16px;">⚠️</div>
+            <h2>Si è verificato un errore</h2>
+            <p id="error-message"></p>
+            <button onclick="location.reload()">
                 <i class="fas fa-redo"></i> Riprova
             </button>
         </div>
 
-        <!-- Container risultati -->
-        <div class="results-container" id="podcasts-container">
-            <!-- I podcast verranno inseriti qui dinamicamente -->
+        <!-- =============================================
+             PAGE HEADER (visibile dopo il caricamento)
+             ============================================= -->
+        <div class="page-header" id="page-header" style="display: none;">
+            <span class="page-label">I tuoi risultati</span>
+            <h1>I podcast consigliati per te</h1>
+            <p class="page-sub">Ordinati per affinità con le tue preferenze.</p>
+
         </div>
 
-        <!-- Bottone torna indietro -->
-        <button class="btn-back" onclick="window.location.href='../preferenze/preferenze.html'">
-            <i class="fas fa-arrow-left"></i>
-            Torna alla selezione
-        </button>
-    </div>
+        <!-- =============================================
+             CONTAINER RISULTATI
+             JS usa: id="podcasts-container" per inserire le card
+             ============================================= -->
+        <div class="results-container" id="podcasts-container">
+            
+            <!-- Le podcast card vengono inserite dinamicamente da script_risultato.js -->
+        </div>
 
-    <!-- Modal dettagli podcast -->
+        <!-- =============================================
+             BOTTONE TORNA INDIETRO
+             JS usa: onclick diretto (non modificare)
+             DISATTIVATO
+             ============================================= -->
+        <div class="bottom-cta" id="bottom-cta" style="display:none;">
+            <button class="btn-back" onclick="window.location.href='../preferenze/preferenze.html'">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Torna alla selezione
+            </button>
+        </div>
+    </main>
+
+    <!-- =============================================
+         MODAL DETTAGLI PODCAST
+         JS usa: id="modal", .modal, .modal.active,
+         id="modalImage", id="modalTitle",
+         id="modalCompatibility", id="modalDescription",
+         id="modalTags", onclick="closeModal()"
+         ============================================= -->
     <div class="modal" id="modal">
         <div class="modal-overlay" onclick="closeModal()"></div>
         <div class="modal-content">

@@ -3,7 +3,7 @@
     {
       "titolo": "Indagini",
       "descrizione": "indagini.txt",
-      "punteggio": 20.0,
+      "punteggio": 90.0,
       "tag_comuni": ["crime"],
       "link": "https://open.spotify.com",
       "immagine": "indagini.webp"
@@ -11,7 +11,7 @@
     {
       "titolo": "Elisa True Crime",
       "descrizione": "elisa-true-crime.txt",
-      "punteggio": 20.0,
+      "punteggio": 70.0,
       "tag_comuni": ["crime"],
       "link": "https://open.spotify.com",
       "immagine": "elisa-true-crime.webp"
@@ -19,7 +19,7 @@
     {
       "titolo": "Il podcast di Alessandro Barbero: Lezioni e Conferenze di Storia",
       "descrizione": "barbero.txt",
-      "punteggio": 20.0,
+      "punteggio": 50.0,
       "tag_comuni": ["storia"],
       "link": "https://open.spotify.com",
       "immagine": "barbero.webp"
@@ -27,7 +27,7 @@
     {
       "titolo": "Non aprite quella podcast",
       "descrizione": "non-aprite-quella-podcast.txt",
-      "punteggio": 20.0,
+      "punteggio": 30.0,
       "tag_comuni": ["crime"],
       "link": "https://open.spotify.com",
       "immagine": "non-aprite-quella-podcast.webp"

@@ -3,198 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PodcastMatch • Seleziona le tue preferenze</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="css/style_preferenze.css">
+    <title>RECO.AI • Seleziona le tue preferenze</title>
+
+    <!-- Google Fonts: nuovo design system -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome (per le icone dei tag) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Stili -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style_preferenze.css">
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1>RECO.AI</h1>
-            <p class="subtitle">Scopri i podcast perfetti per te in base alle tue passioni e interessi</p>
-        </header>
 
-        <div class="category">
-            <h2 class="category-title">Seleziona esattamente 3 tematiche</h2>
-            <div class="tags-grid" id="tematicheGrid">
-                <!-- Tematiche -->
-                <div class="tag" data-value="intrattenimento">
-                    <i class="fas fa-film"></i>
-                    <span>Intrattenimento</span>
-                </div>
-                <div class="tag" data-value="cultura">
-                    <i class="fas fa-landmark"></i>
-                    <span>Cultura</span>
-                </div>
-                <div class="tag" data-value="interviste">
-                    <i class="fas fa-microphone-alt"></i>
-                    <span>Interviste</span>
-                </div>
-                <div class="tag" data-value="attualita">
-                    <i class="fas fa-newspaper"></i>
-                    <span>Attualità</span>
-                </div>
-                <div class="tag" data-value="politica">
-                    <i class="fas fa-balance-scale"></i>
-                    <span>Politica</span>
-                </div>
-                <div class="tag" data-value="satira">
-                    <i class="fas fa-theater-masks"></i>
-                    <span>Satira</span>
-                </div>
-                <div class="tag" data-value="storie-vita">
-                    <i class="fas fa-book-open"></i>
-                    <span>Storie di vita</span>
-                </div>
-                <div class="tag" data-value="cultura-pop">
-                    <i class="fas fa-star"></i>
-                    <span>Cultura pop</span>
-                </div>
-                <div class="tag" data-value="umorismo">
-                    <i class="fas fa-laugh"></i>
-                    <span>Umorismo</span>
-                </div>
-                <div class="tag" data-value="crime">
-                    <i class="fas fa-search"></i>
-                    <span>Crime</span>
-                </div>
-                <div class="tag" data-value="mistero">
-                    <i class="fas fa-moon"></i>
-                    <span>Mistero</span>
-                </div>
-                <div class="tag" data-value="narrazione">
-                    <i class="fas fa-book-reader"></i>
-                    <span>Narrazione</span>
-                </div>
-                <div class="tag" data-value="sviluppo-personale">
-                    <i class="fas fa-brain"></i>
-                    <span>Sviluppo personale</span>
-                </div>
-                <div class="tag" data-value="psicologia-maschile">
-                    <i class="fas fa-user-tie"></i>
-                    <span>Psicologia maschile</span>
-                </div>
-                <div class="tag" data-value="mindset">
-                    <i class="fas fa-lightbulb"></i>
-                    <span>Mindset</span>
-                </div>
-                <div class="tag" data-value="talk-show">
-                    <i class="fas fa-tv"></i>
-                    <span>Talk show</span>
-                </div>
-                <div class="tag" data-value="cinema">
-                    <i class="fas fa-video"></i>
-                    <span>Cinema</span>
-                </div>
-                <div class="tag" data-value="serie-tv">
-                    <i class="fas fa-tv"></i>
-                    <span>Serie TV</span>
-                </div>
-                <div class="tag" data-value="recensioni">
-                    <i class="fas fa-star-half-alt"></i>
-                    <span>Recensioni</span>
-                </div>
-                <div class="tag" data-value="videogiochi">
-                    <i class="fas fa-gamepad"></i>
-                    <span>Videogiochi</span>
-                </div>
-                <div class="tag" data-value="true-crime">
-                    <i class="fas fa-fingerprint"></i>
-                    <span>True crime</span>
-                </div>
-                <div class="tag" data-value="cronaca-nera">
-                    <i class="fas fa-gavel"></i>
-                    <span>Cronaca nera</span>
-                </div>
-                <div class="tag" data-value="investigazione">
-                    <i class="fas fa-search-plus"></i>
-                    <span>Investigazione</span>
-                </div>
-                <div class="tag" data-value="inchiesta">
-                    <i class="fas fa-file-alt"></i>
-                    <span>Inchiesta</span>
-                </div>
-                <div class="tag" data-value="news">
-                    <i class="fas fa-bullhorn"></i>
-                    <span>News</span>
-                </div>
-                <div class="tag" data-value="storie">
-                    <i class="fas fa-history"></i>
-                    <span>Storie</span>
-                </div>
-                <div class="tag" data-value="storia">
-                    <i class="fas fa-landmark"></i>
-                    <span>Storia</span>
-                </div>
-                <div class="tag" data-value="educativo">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>Educativo</span>
-                </div>
-                <div class="tag" data-value="economia">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Economia</span>
-                </div>
-                <div class="tag" data-value="finanza">
-                    <i class="fas fa-money-bill-wave"></i>
-                    <span>Finanza</span>
-                </div>
-                <div class="tag" data-value="ispirazione">
-                    <i class="fas fa-fire"></i>
-                    <span>Ispirazione</span>
-                </div>
-                <div class="tag" data-value="commedia">
-                    <i class="fas fa-laugh-beam"></i>
-                    <span>Commedia</span>
-                </div>
-                <div class="tag" data-value="irriverente">
-                    <i class="fas fa-grin-tongue"></i>
-                    <span>Irriverente</span>
-                </div>
-                <div class="tag" data-value="musica">
-                    <i class="fas fa-music"></i>
-                    <span>Musica</span>
-                </div>
-                <div class="tag" data-value="tv-film">
-                    <i class="fas fa-film"></i>
-                    <span>TV / Film</span>
-                </div>
-                <div class="tag" data-value="sintesi">
-                    <i class="fas fa-compress-alt"></i>
-                    <span>Sintesi</span>
-                </div>
-                <div class="tag" data-value="scienze">
-                    <i class="fas fa-flask"></i>
-                    <span>Scienze</span>
-                </div>
-                <div class="tag" data-value="analisi">
-                    <i class="fas fa-chart-bar"></i>
-                    <span>Analisi</span>
-                </div>
-                <div class="tag" data-value="societa">
-                    <i class="fas fa-users"></i>
-                    <span>Società</span>
-                </div>
-            </div>
-            <p style="text-align: center; margin-top: 24px; color: var(--text-tertiary); font-size: 0.95rem;">
-                <i class="fas fa-info-circle"></i> Seleziona esattamente 3 tematiche per continuare
-            </p>
+    <!-- Decorazioni orb di sfondo -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- Header fisso -->
+    <header>
+        <a href="../index.html">
+            <img src="../assets/img/logo.png" alt="RECO.AI" class="logo-img"
+                 onerror="this.outerHTML='<span class=\'logo-text\'>RECO.AI</span>'">
+        </a>
+        <div class="step-indicator">
+            <div class="step-dot active "></div>
+            <div class="step-dot"></div>
+            <span>Passo 1 di 2</span>
+        </div>
+    </header>
+
+    <main>
+        <!-- Intestazione pagina -->
+        <div class="page-header">
+            <span class="page-label">Personalizzazione</span>
+            <h1>Cosa ti appassiona?</h1>
         </div>
 
+        <!-- Griglia selezione tematiche
+             ID e data-value mantenuti intatti per script_preferenze.js -->
+        <div class="category">
+            <p class="category-title">Seleziona 3 categorie per scoprire i podcast più affini a te </p>
+
+            <div class="tags-grid" id="tematicheGrid">
+                <div class="tag" data-value="intrattenimento"><i class="fas fa-film"></i><span>Intrattenimento</span></div>
+                <div class="tag" data-value="cultura"><i class="fas fa-landmark"></i><span>Cultura</span></div>
+                <div class="tag" data-value="interviste"><i class="fas fa-microphone-alt"></i><span>Interviste</span></div>
+                <div class="tag" data-value="attualita"><i class="fas fa-newspaper"></i><span>Attualità</span></div>
+                <div class="tag" data-value="politica"><i class="fas fa-balance-scale"></i><span>Politica</span></div>
+                <div class="tag" data-value="satira"><i class="fas fa-theater-masks"></i><span>Satira</span></div>
+                <div class="tag" data-value="storie-vita"><i class="fas fa-book-open"></i><span>Storie di vita</span></div>
+                <div class="tag" data-value="cultura-pop"><i class="fas fa-star"></i><span>Cultura pop</span></div>
+                <div class="tag" data-value="umorismo"><i class="fas fa-laugh"></i><span>Umorismo</span></div>
+                <div class="tag" data-value="crime"><i class="fas fa-search"></i><span>Crime</span></div>
+                <div class="tag" data-value="mistero"><i class="fas fa-moon"></i><span>Mistero</span></div>
+                <div class="tag" data-value="narrazione"><i class="fas fa-book-reader"></i><span>Narrazione</span></div>
+                <div class="tag" data-value="sviluppo-personale"><i class="fas fa-brain"></i><span>Sviluppo personale</span></div>
+                <div class="tag" data-value="psicologia-maschile"><i class="fas fa-user-tie"></i><span>Psicologia maschile</span></div>
+                <div class="tag" data-value="mindset"><i class="fas fa-lightbulb"></i><span>Mindset</span></div>
+                <div class="tag" data-value="talk-show"><i class="fas fa-tv"></i><span>Talk show</span></div>
+                <div class="tag" data-value="cinema"><i class="fas fa-video"></i><span>Cinema</span></div>
+                <div class="tag" data-value="serie-tv"><i class="fas fa-tv"></i><span>Serie TV</span></div>
+                <div class="tag" data-value="recensioni"><i class="fas fa-star-half-alt"></i><span>Recensioni</span></div>
+                <div class="tag" data-value="videogiochi"><i class="fas fa-gamepad"></i><span>Videogiochi</span></div>
+                <div class="tag" data-value="true-crime"><i class="fas fa-fingerprint"></i><span>True crime</span></div>
+                <div class="tag" data-value="cronaca-nera"><i class="fas fa-gavel"></i><span>Cronaca nera</span></div>
+                <div class="tag" data-value="investigazione"><i class="fas fa-search-plus"></i><span>Investigazione</span></div>
+                <div class="tag" data-value="inchiesta"><i class="fas fa-file-alt"></i><span>Inchiesta</span></div>
+                <div class="tag" data-value="news"><i class="fas fa-bullhorn"></i><span>News</span></div>
+                <div class="tag" data-value="storie"><i class="fas fa-history"></i><span>Storie</span></div>
+                <div class="tag" data-value="storia"><i class="fas fa-landmark"></i><span>Storia</span></div>
+                <div class="tag" data-value="educativo"><i class="fas fa-graduation-cap"></i><span>Educativo</span></div>
+                <div class="tag" data-value="economia"><i class="fas fa-chart-line"></i><span>Economia</span></div>
+                <div class="tag" data-value="finanza"><i class="fas fa-money-bill-wave"></i><span>Finanza</span></div>
+                <div class="tag" data-value="ispirazione"><i class="fas fa-fire"></i><span>Ispirazione</span></div>
+                <div class="tag" data-value="commedia"><i class="fas fa-laugh-beam"></i><span>Commedia</span></div>
+                <div class="tag" data-value="irriverente"><i class="fas fa-grin-tongue"></i><span>Irriverente</span></div>
+                <div class="tag" data-value="musica"><i class="fas fa-music"></i><span>Musica</span></div>
+                <div class="tag" data-value="tv-film"><i class="fas fa-film"></i><span>TV / Film</span></div>
+                <div class="tag" data-value="sintesi"><i class="fas fa-compress-alt"></i><span>Sintesi</span></div>
+                <div class="tag" data-value="scienze"><i class="fas fa-flask"></i><span>Scienze</span></div>
+                <div class="tag" data-value="analisi"><i class="fas fa-chart-bar"></i><span>Analisi</span></div>
+                <div class="tag" data-value="societa"><i class="fas fa-users"></i><span>Società</span></div>
+            </div>
+
+            
+        </div>
+
+        <!-- Barra azioni ID mantenuti intatti per script_preferenze.js -->
         <div class="actions">
-            <button class="btn-submit" id="submitBtn">
-                <i class="fas fa-magic"></i>
-                Genera JSON e trova podcast
-            </button>
             <button class="btn-reset" id="resetBtn">
                 <i class="fas fa-redo"></i>
                 Azzera tutto
             </button>
+            <button class="btn-submit" id="submitBtn">
+                <i class="fas fa-magic"></i>
+                Genera e trova podcast
+            </button>
         </div>
-    </div>
+    </main>
 
     <script src="js/script_preferenze.js"></script>
 </body>

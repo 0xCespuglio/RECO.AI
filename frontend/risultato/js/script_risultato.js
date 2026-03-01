@@ -85,6 +85,23 @@ function hideLoading() {
 }
 
 /**
+ * Mostra l'intestazione della pagina (usata dopo che i podcast sono stati caricati).
+ */
+function showHeader() {
+    const header = document.getElementById('page-header');
+    if (header) {
+        header.style.display = 'block';
+    }
+
+    /* BOTTONE DISATTIVATO
+    const bottom = document.getElementById('bottom-cta');
+    if (bottom) {
+        bottom.style.display = 'block';
+        }
+    */
+}
+
+/**
  * Mostra un messaggio di errore
  * @param {string} message - Messaggio di errore da visualizzare
  */
@@ -107,6 +124,9 @@ function displayPodcasts(podcasts) {
         console.error('Contenitore podcast non disponibile');
         return;
     }
+
+    // rendiamo visibile l'header e il pulsante indietro
+    showHeader();
     
     // Svuota il contenitore
     podcastsContainer.innerHTML = '';

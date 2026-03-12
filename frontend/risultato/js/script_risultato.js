@@ -64,10 +64,12 @@ async function loadPodcasts() {
         }
         
         // Nascondi il messaggio di caricamento
-        hideLoading();
+        setTimeout(() => {hideLoading();},1500); 
+        
         
         // Visualizza i podcast
-        displayPodcasts(data.ranking);
+        setTimeout(() => {displayPodcasts(data.ranking)},1500); 
+
         
     } catch (error) {
         console.error('Errore nel caricamento dei podcast:', error);

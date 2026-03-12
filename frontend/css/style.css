@@ -58,6 +58,10 @@ body::before {
     z-index: 0;
 }
 
+a {
+    text-decoration: none;
+}
+
 /* === ORB BASE (posizionamento specifico in ogni foglio pagina) === */
 .orb {
     position: fixed;
@@ -109,28 +113,6 @@ header {
     border-radius: 100px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-}
-
-/* Step indicator (preferenze + risultato) */
-.step-indicator {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.78rem;
-    color: var(--muted);
-}
-
-.step-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--muted);
-    transition: background 0.3s, box-shadow 0.3s;
-}
-
-.step-dot.active {
-    background: var(--accent);
-    box-shadow: 0 0 8px var(--accent);
 }
 
 /* === IMMAGINI === */

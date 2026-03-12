@@ -1,60 +1,60 @@
 {
   "ranking": [
     {
-      "titolo": "Indagini",
-      "descrizione": "indagini.txt",
-      "punteggio": 90.0,
-      "tag_comuni": ["crime"],
-      "link": "https://open.spotify.com",
-      "immagine": "indagini.webp"
+      "titolo": "La Zanzara",
+      "descrizione": "la-zanzara.txt",
+      "punteggio": 20.0,
+      "tag_comuni": ["satira"],
+      "link": "https://open.spotify.com/show/2xQtCpDNsCQNC3ORZyAclC",
+      "immagine": "la-zanzara.webp"
     },
     {
-      "titolo": "Elisa True Crime",
-      "descrizione": "elisa-true-crime.txt",
-      "punteggio": 70.0,
-      "tag_comuni": ["crime"],
-      "link": "https://open.spotify.com",
-      "immagine": "elisa-true-crime.webp"
-    },
-    {
-      "titolo": "Il podcast di Alessandro Barbero: Lezioni e Conferenze di Storia",
-      "descrizione": "barbero.txt",
-      "punteggio": 50.0,
-      "tag_comuni": ["storia"],
-      "link": "https://open.spotify.com",
-      "immagine": "barbero.webp"
+      "titolo": "Non hanno un amico",
+      "descrizione": "non-hanno-un-amico.txt",
+      "punteggio": 20.0,
+      "tag_comuni": ["satira"],
+      "link": "https://open.spotify.com/show/47tTRdYaS4J7XtgbvQxR48",
+      "immagine": "non-hanno-un-amico.webp"
     },
     {
       "titolo": "Non aprite quella podcast",
       "descrizione": "non-aprite-quella-podcast.txt",
-      "punteggio": 30.0,
-      "tag_comuni": ["crime"],
-      "link": "https://open.spotify.com",
+      "punteggio": 20.0,
+      "tag_comuni": ["satira"],
+      "link": "https://open.spotify.com/show/2wpbJ0TmiPerI4xDaV4L9m",
       "immagine": "non-aprite-quella-podcast.webp"
     },
     {
-      "titolo": "PodCast di Giacomo Poretti",
-      "descrizione": "podcast-giacomo-poretti.txt",
+      "titolo": "PoretCast",
+      "descrizione": "poretcast.txt",
       "punteggio": 20.0,
       "tag_comuni": ["umorismo"],
-      "link": "https://open.spotify.com",
-      "immagine": "podcast-giacomo-poretti.webp"
+      "link": "https://open.spotify.com/show/6uMX6phOCAWFJu8ILEUxq4",
+      "immagine": "poretcast.webp"
     },
     {
       "titolo": "Din Don Down",
       "descrizione": "din-don-down.txt",
       "punteggio": 20.0,
       "tag_comuni": ["umorismo"],
-      "link": "https://open.spotify.com",
-      "immagine": "din-don-down.webp "
+      "link": "https://open.spotify.com/show/2iaCLzm359FlwYI7lV6gDp",
+      "immagine": "din-don-down.webp"
     },
     {
-      "titolo": "Un avvertimento prima di iniziare",
-      "descrizione": "un-avvertimento-prima-di-iniziare.txt",
+      "titolo": "Streetsmart",
+      "descrizione": "streetsmart.txt",
       "punteggio": 20.0,
-      "tag_comuni": ["crime"],
-      "link": "https://open.spotify.com",
-      "immagine": "un-avvertimento-prima-di-iniziare.webp"
+      "tag_comuni": ["satira"],
+      "link": "https://open.spotify.com/show/66xtN6seXpkHY6Ylv7Ttux",
+      "immagine": "streetsmart.webp"
+    },
+    {
+      "titolo": "Power Pizza",
+      "descrizione": "power-pizza.txt",
+      "punteggio": 20.0,
+      "tag_comuni": ["videogiochi"],
+      "link": "https://open.spotify.com/show/2sKgwTIfc37F354QmReZzo",
+      "immagine": "power-pizza.webp"
     }
   ]
 }

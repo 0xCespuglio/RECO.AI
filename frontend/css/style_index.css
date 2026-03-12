@@ -56,7 +56,7 @@ main {
 
 /* === TITOLO PRINCIPALE === */
 h1 {
-    font-family: 'POPPINS', sans-serif;
+    font-family: 'Syne', sans-serif;
     font-weight: 800;
     font-size: clamp(2.8rem, 7vw, 5.5rem);
     line-height: 1.1;
@@ -79,11 +79,12 @@ h1 span {
 
    
     
-    font-family: 'POPPINS', sans-serif;
+    font-family: 'poppins', sans-serif;
     font-size: clamp(1rem, 2vw, 1.15rem);
     color: var(--muted);
-    font-weight: 400;
+    font-weight: 600;
     max-width: 480px;
+    letter-spacing: 0em;
     line-height: 1.75;
     margin-bottom: 48px;
     opacity: 0;

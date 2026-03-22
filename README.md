@@ -112,7 +112,7 @@ Prima di avviare il progetto, assicurati di avere installato:
 **1. Clona il repository**
 ```bash
 git clone https://github.com/0xCespuglio/RECO.AI.git
-cd RECO-AI
+cd RECO.AI
 ```
 
 **2. Installa le dipendenze Python**

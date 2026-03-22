@@ -189,5 +189,5 @@ Ernesto Capponi · Antonio Canarino · Mario Spiotta · Pasquale Castellano
 **Script**
 Andrea Lepore · Matthias Altomare · Vittorio Graziano · Renato Apice · Carmine Penna
 
-**Scrittura della presentazione**
+**Scrittura della presentazione e documentazione**
 Michele Cotovanu · Ian Fernandes · Carmine Cioffi · Marco Savino

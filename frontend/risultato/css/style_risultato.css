@@ -231,6 +231,9 @@ h1 {
     cursor: pointer;
     opacity: 0;
     animation: fadeUp 0.5s ease forwards;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .podcast-card:hover {
@@ -345,7 +348,8 @@ h1 {
 
 /* --- Link Spotify --- */
 .podcast-link-container {
-    margin-top: 18px;
+    margin-top: auto;
+    padding-top: 18px;
     text-align: center;
 }
 
@@ -517,7 +521,6 @@ h1 {
 
 .modal-compatibility {
     display: inline-block;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
     color: white;
     padding: 5px 14px;
     border-radius: 100px;

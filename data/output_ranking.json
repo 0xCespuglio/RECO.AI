@@ -1,60 +1,44 @@
 {
   "ranking": [
     {
-      "titolo": "La Zanzara",
-      "descrizione": "la-zanzara.txt",
-      "punteggio": 20.0,
-      "tag_comuni": ["satira"],
-      "link": "https://open.spotify.com/show/2xQtCpDNsCQNC3ORZyAclC",
-      "immagine": "la-zanzara.webp"
-    },
-    {
       "titolo": "Non hanno un amico",
       "descrizione": "non-hanno-un-amico.txt",
-      "punteggio": 20.0,
-      "tag_comuni": ["satira"],
+      "punteggio": 33.3,
+      "tag_comuni": ["irriverente"],
       "link": "https://open.spotify.com/show/47tTRdYaS4J7XtgbvQxR48",
       "immagine": "non-hanno-un-amico.webp"
     },
     {
+      "titolo": "Lo Zoo di 105",
+      "descrizione": "lo-zoo-di-105.txt",
+      "punteggio": 33.3,
+      "tag_comuni": ["irriverente"],
+      "link": "https://open.spotify.com/show/4jDGLlNUblFa0wiryMrkDW",
+      "immagine": "lo-zoo-di-105.webp"
+    },
+    {
+      "titolo": "Gurulandia",
+      "descrizione": "gurulandia.txt",
+      "punteggio": 33.3,
+      "tag_comuni": ["irriverente"],
+      "link": "https://open.spotify.com/show/4XAUzQqAODh1dfjYIFAXea",
+      "immagine": "gurulandia.webp"
+    },
+    {
+      "titolo": "La Zanzara",
+      "descrizione": "la-zanzara.txt",
+      "punteggio": 25.0,
+      "tag_comuni": ["irriverente"],
+      "link": "https://open.spotify.com/show/2xQtCpDNsCQNC3ORZyAclC",
+      "immagine": "la-zanzara.webp"
+    },
+    {
       "titolo": "Non aprite quella podcast",
       "descrizione": "non-aprite-quella-podcast.txt",
-      "punteggio": 20.0,
-      "tag_comuni": ["satira"],
+      "punteggio": 25.0,
+      "tag_comuni": ["irriverente"],
       "link": "https://open.spotify.com/show/2wpbJ0TmiPerI4xDaV4L9m",
       "immagine": "non-aprite-quella-podcast.webp"
-    },
-    {
-      "titolo": "PoretCast",
-      "descrizione": "poretcast.txt",
-      "punteggio": 20.0,
-      "tag_comuni": ["umorismo"],
-      "link": "https://open.spotify.com/show/6uMX6phOCAWFJu8ILEUxq4",
-      "immagine": "poretcast.webp"
-    },
-    {
-      "titolo": "Din Don Down",
-      "descrizione": "din-don-down.txt",
-      "punteggio": 20.0,
-      "tag_comuni": ["umorismo"],
-      "link": "https://open.spotify.com/show/2iaCLzm359FlwYI7lV6gDp",
-      "immagine": "din-don-down.webp"
-    },
-    {
-      "titolo": "Streetsmart",
-      "descrizione": "streetsmart.txt",
-      "punteggio": 20.0,
-      "tag_comuni": ["satira"],
-      "link": "https://open.spotify.com/show/66xtN6seXpkHY6Ylv7Ttux",
-      "immagine": "streetsmart.webp"
-    },
-    {
-      "titolo": "Power Pizza",
-      "descrizione": "power-pizza.txt",
-      "punteggio": 20.0,
-      "tag_comuni": ["videogiochi"],
-      "link": "https://open.spotify.com/show/2sKgwTIfc37F354QmReZzo",
-      "immagine": "power-pizza.webp"
     }
   ]
 }

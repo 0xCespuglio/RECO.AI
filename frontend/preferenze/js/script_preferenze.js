@@ -7,43 +7,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!tagsContainer || !submitBtn || !resetBtn) return;
 
+    // --- STATO BOTTONE (grigio se 0 tag selezionati) ---
+    function updateSubmitState() {
+        const count = document.querySelectorAll('.tag.selected').length;
+        submitBtn.disabled = count === 0;
+    }
+    updateSubmitState(); // disabilitato al caricamento
+
     // --- SELEZIONE TAG ---
     tagsContainer.addEventListener('click', (e) => {
         const tag = e.target.closest('.tag');
         if (!tag) return;
 
-        const selected = document.querySelectorAll('.tag.selected').length;
         if (tag.classList.contains('selected')) {
             tag.classList.remove('selected');
             tag.setAttribute('aria-checked', 'false');
-            return;
+        } else {
+            tag.classList.add('selected');
+            tag.setAttribute('aria-checked', 'true');
         }
-        if (selected >= 3) {
-            alert('Puoi selezionare al massimo 3 preferenze');
-            return;
-        }
-        tag.classList.add('selected');
-        tag.setAttribute('aria-checked', 'true');
+        updateSubmitState();
     });
 
     // --- RESET ---
-    resetBtn.addEventListener('click', () => {
-        if (!confirm('Vuoi davvero azzerare tutte le selezioni?')) return;
+    resetBtn.addEventListener('click', () => {      
         document.querySelectorAll('.tag').forEach(t => {
             t.classList.remove('selected');
             t.setAttribute('aria-checked', 'false');
         });
+        updateSubmitState();
     });
 
     // --- SUBMIT ---
     submitBtn.addEventListener('click', async () => {
         const prefs = Array.from(document.querySelectorAll('.tag.selected'))
             .map(t => t.getAttribute('data-value') || t.querySelector('span')?.textContent.trim());
-
-        if (prefs.length !== 3) {
-            alert('Seleziona esattamente 3 preferenze');
-            return;
-        }
 
         try {
             submitBtn.disabled = true;

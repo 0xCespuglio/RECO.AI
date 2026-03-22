@@ -86,12 +86,6 @@ header {
     background: rgba(251, 244, 244, 0.85);
 }
 
-.logo-img {
-    width: 150px;
-    height: auto;
-    display: block;
-}
-
 /* Logo testuale (fallback se immagine assente) */
 .logo-text {
     font-family: 'Syne', sans-serif;

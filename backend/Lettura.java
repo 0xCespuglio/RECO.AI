@@ -42,7 +42,7 @@ public class Lettura {
     // METEDO PER LEGGERE LE PREFERENZE DELL'UTENTE
 
     public static String[] leggiPreferenze(String pathPreferenze) {
-        String[] tags = new String[3];
+        ArrayList<String> tagsList = new ArrayList<>();
     
         try (BufferedReader br = new BufferedReader(new FileReader(pathPreferenze))) {
             StringBuilder jsonContent = new StringBuilder();
@@ -57,8 +57,11 @@ public class Lettura {
             String tagsSection = json.substring(json.indexOf("[") + 1, json.indexOf("]"));
             String[] parti = tagsSection.split(","); 
 
-            for (int i = 0; i < parti.length && i < 3; i++) {
-                tags[i] = parti[i].trim().replace("\"", "");
+            for (String parte : parti) {
+                String tag = parte.trim().replace("\"", "");
+                if (!tag.isEmpty()) {
+                    tagsList.add(tag);
+                }
             }
 
             System.out.println(pathPreferenze.split("/")[1] +" letto correttamente da: " + pathPreferenze);
@@ -69,6 +72,6 @@ public class Lettura {
             logger.log(Level.SEVERE, "Errore", e);
         }
 
-        return tags;
+        return tagsList.toArray(String[]::new); 
     }
 }

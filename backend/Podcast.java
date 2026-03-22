@@ -36,7 +36,7 @@ public class Podcast {
         return immagine;
     }
 
-    // --- SETTER ---
+    // SETTER
     public void setNome(String nome) {
         this.nome = nome;
     }

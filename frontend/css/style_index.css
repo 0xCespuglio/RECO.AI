@@ -76,14 +76,11 @@ h1 span {
 
 /* === HERO SUBTITLE === */
 .hero-sub {
-
-   
-    
     font-family: 'poppins', sans-serif;
-    font-size: clamp(1rem, 2vw, 1.15rem);
+    font-size: clamp(1.35rem, 1.85vw, 1.50rem);
     color: var(--muted);
-    font-weight: 600;
-    max-width: 480px;
+    font-weight: 500;
+    max-width: 550px;
     letter-spacing: 0em;
     line-height: 1.75;
     margin-bottom: 48px;
@@ -155,42 +152,6 @@ h1 span {
 .btn-start:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 50px rgba(213, 0, 0, 0.45);
-}
-
-/* === WAVEFORM DECORATION === */
-.waveform {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    margin-top: 80px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.8s;
-}
-
-.wave-bar {
-    width: 3px;
-    background: linear-gradient(to top, var(--accent), var(--accent2));
-    border-radius: 10px;
-    animation: wave 1.4s ease-in-out infinite;
-}
-
-.wave-bar:nth-child(1)  { height: 12px; animation-delay: 0.0s; }
-.wave-bar:nth-child(2)  { height: 24px; animation-delay: 0.1s; }
-.wave-bar:nth-child(3)  { height: 36px; animation-delay: 0.2s; }
-.wave-bar:nth-child(4)  { height: 20px; animation-delay: 0.3s; }
-.wave-bar:nth-child(5)  { height: 30px; animation-delay: 0.4s; }
-.wave-bar:nth-child(6)  { height: 16px; animation-delay: 0.5s; }
-.wave-bar:nth-child(7)  { height: 28px; animation-delay: 0.6s; }
-.wave-bar:nth-child(8)  { height: 20px; animation-delay: 0.5s; }
-.wave-bar:nth-child(9)  { height: 32px; animation-delay: 0.4s; }
-.wave-bar:nth-child(10) { height: 18px; animation-delay: 0.3s; }
-.wave-bar:nth-child(11) { height: 26px; animation-delay: 0.2s; }
-.wave-bar:nth-child(12) { height: 14px; animation-delay: 0.1s; }
-
-@keyframes wave {
-    0%, 100% { transform: scaleY(1); opacity: 0.6; }
-    50%       { transform: scaleY(0.4); opacity: 0.3; }
 }
 
 /* === RESPONSIVE === */

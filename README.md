@@ -176,17 +176,17 @@ I podcast con punteggio `0` (nessun tag in comune) vengono esclusi dai risultati
 
 ## 👥 Team
 
-**Progettazione**
+**Progettazione**  
 Donato Amoroso · Domenico Gaeta · Emanuele Del Vacchio · Domenico Pappacoda
 
-**Sviluppo**
+**Sviluppo**  
 Vincenzo Ercolino · Stefano Picariello · Raffaele Donnarummo · Carmine Napolitano
 
-**Grafica**
+**Grafica**  
 Ernesto Capponi · Antonio Canarino · Mario Spiotta · Pasquale Castellano
 
-**Script**
+**Script**  
 Andrea Lepore · Matthias Altomare · Vittorio Graziano · Renato Apice · Carmine Penna
 
-**Scrittura della presentazione e documentazione**
+**Scrittura della presentazione e documentazione**  
 Michele Cotovanu · Ian Fernandes · Carmine Cioffi · Marco Savino

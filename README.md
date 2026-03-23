@@ -32,7 +32,6 @@ Progetto realizzato nell'ambito delle attività di **Formazione Scuola Lavoro (F
 - **Algoritmo di ranking** che calcola l'affinità tra i gusti dell'utente e il catalogo podcast
 - **Risultati ordinati** con badge di compatibilità, copertine e link diretti a Spotify
 - **Modal di dettaglio** per ogni podcast consigliato
-- **Design responsive** ottimizzato per desktop e mobile
 
 ---
 

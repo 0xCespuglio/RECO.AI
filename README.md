@@ -39,7 +39,7 @@ Progetto realizzato nell'ambito delle attività di **Formazione Scuola Lavoro (F
 
 | Homepage | Preferenze | Risultati |
 |:---:|:---:|:---:|
-| ![Homepage](https://github.com/user-attachments/assets/20a7ab29-cabc-4126-b796-b8a88851da0b) | ![Preferenze](https://github.com/user-attachments/assets/46711d12-36f4-421c-9406-ed54d108fd72) | ![Risultati](https://github.com/user-attachments/assets/3b96498d-5448-484f-9dba-bc679faf7298) |
+| ![Homepage](https://github.com/user-attachments/assets/20a7ab29-cabc-4126-b796-b8a88851da0b) | ![Preferenze](https://github.com/user-attachments/assets/cf650897-dc48-4354-85f7-16dd394f0b04) | ![Risultati](https://github.com/user-attachments/assets/3b96498d-5448-484f-9dba-bc679faf7298) |
 
 ---
 

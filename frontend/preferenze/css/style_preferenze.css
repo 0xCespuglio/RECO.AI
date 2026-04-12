@@ -259,6 +259,40 @@ h1 {
     animation: fadeUp 0.5s ease forwards 0.5s;
 }
 
+/* === GRUPPI TAG === */
+.tag-group {
+    margin-bottom: 32px;
+}
+
+.tag-group-label {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Linea orizzontale dopo il titolo del gruppo */
+.tag-group-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+/* Disabilita l'animazione fadeUp sulle griglie interne ai gruppi
+   (già gestita dal .category-title e dal .tags-grid principale) */
+.tag-group .tags-grid {
+    margin-bottom: 0;
+    opacity: 1;
+    animation: none;
+}
+
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
     main { padding: 100px 20px 60px; }

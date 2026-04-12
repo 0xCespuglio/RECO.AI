@@ -1,7 +1,7 @@
 // script_preferenze.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    const tagsContainer = document.querySelector('.tags-grid');
+    const tagsContainer = document.querySelector('.category');
     const submitBtn     = document.getElementById('submitBtn');
     const resetBtn      = document.getElementById('resetBtn');
 

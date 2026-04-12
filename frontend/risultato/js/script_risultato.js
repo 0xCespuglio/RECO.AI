@@ -48,8 +48,8 @@ async function loadPodcasts() {
             throw new Error('Formato JSON non valido: proprietà "ranking" mancante o non array');
         }
 
-        setTimeout(() => { hideLoading(); }, 1200);
-        setTimeout(() => { displayPodcasts(data.ranking); }, 1200);
+        setTimeout(() => { hideLoading(); }, 1000);
+        setTimeout(() => { displayPodcasts(data.ranking); }, 1000);
 
     } catch (error) {
         console.error('Errore nel caricamento dei podcast:', error);
@@ -65,10 +65,8 @@ function showHeader() {
     const header = document.getElementById('page-header');
     if (header) header.style.display = 'block';
 
-    /* BOTTONE DISATTIVATO
     const bottom = document.getElementById('bottom-cta');
     if (bottom) bottom.style.display = 'block';
-    */
 }
 
 function showError(message) {
